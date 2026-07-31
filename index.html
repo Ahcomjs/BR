@@ -229,6 +229,17 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
 .warn h3{color:var(--stitch);font-size:20px;margin-bottom:6px}
 .foot{margin-top:50px;border-top:3px solid var(--ink);padding:14px 0 60px;
   font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.estado{font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;line-height:1.6;
+  color:var(--soft);margin:14px 0 0;padding:9px 12px;border-left:3px solid var(--line);
+  background:var(--card);display:none}
+.estado.ok,.estado.warn2{display:block}
+.estado:not(:empty){display:block}
+.estado.ok{border-left-color:var(--grass)}
+.estado.warn2{border-left-color:var(--stitch);color:var(--ink)}
+.estado b{color:var(--ink)}
+.estado button{background:transparent;border:0;padding:0;margin-left:8px;color:var(--stitch);
+  font-family:var(--mono);font-size:11.5px;text-decoration:underline;text-underline-offset:3px}
+@media print{.estado{display:none!important}}
 .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
 .tools button{background:var(--card);border:1px solid var(--line);padding:8px 13px;
   font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
@@ -279,6 +290,7 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
 </div>
 
 <div class="shell">
+<p class="estado" id="estado" role="status" aria-live="polite"></p>
 
 <section id="hoy">
   <div class="shead"><span class="n">01</span><h2>Qué me toca hoy</h2></div>
@@ -1149,10 +1161,10 @@ inp.value=toVal(start);
 inp.addEventListener('change',()=>{
   if(!inp.value)return;
   start=parseD(inp.value);
-  save();renderAll();
+  guardar();renderAll();
 });
 document.getElementById('wkSel').onchange=e=>{
-  wkMode=e.target.value;renderSessions();renderSheet();
+  wkMode=e.target.value;guardar();renderSessions();renderSheet();
 };
 document.getElementById('btnSheet').onclick=()=>{
   document.body.classList.add('psheet');
@@ -1164,14 +1176,71 @@ document.getElementById('btnPrint').onclick=()=>{
   setTimeout(()=>{window.print();showAll=prev;renderDaybar();renderSessions();},120);
 };
 
-/* guardar la fecha elegida, si el entorno lo permite */
-async function save(){try{if(window.storage)await window.storage.set('inicio',toVal(start));}catch(e){}}
-async function load(){
-  try{if(window.storage){const r=await window.storage.get('inicio');
-    if(r&&r.value){start=parseD(r.value);inp.value=toVal(start);}}}catch(e){}
-  renderAll();
+/* ===================== GUARDADO EN localStorage ===================== */
+const LS_KEY='planBeisbol.v1';
+let memoria={};                 // respaldo si el navegador bloquea localStorage
+let almacenOK=true;
+
+function leerAlmacen(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    return raw?JSON.parse(raw):null;
+  }catch(e){ almacenOK=false; return memoria[LS_KEY]||null; }
 }
-load();
+function escribirAlmacen(obj){
+  try{
+    localStorage.setItem(LS_KEY, JSON.stringify(obj));
+  }catch(e){ almacenOK=false; memoria[LS_KEY]=obj; }
+}
+function guardar(){
+  escribirAlmacen({inicio:toVal(start), semana:wkMode, guardadoEl:new Date().toISOString()});
+  marcarEstado('guardado');
+}
+function borrarGuardado(){
+  try{ localStorage.removeItem(LS_KEY); }catch(e){ delete memoria[LS_KEY]; }
+}
+
+/* aviso discreto bajo la barra */
+function marcarEstado(tipo,fechaGuardada){
+  const el=document.getElementById('estado');
+  if(!el)return;
+  if(!almacenOK){
+    el.className='estado warn2';
+    el.innerHTML='Tu navegador está bloqueando el guardado (suele pasar en modo incógnito). '
+      +'La fecha funcionará mientras tengas la página abierta, pero se perderá al cerrarla.';
+    return;
+  }
+  if(tipo==='restaurado'){
+    el.className='estado';
+    el.innerHTML='Retomando tu plan guardado: empezaste el <b>'+fLong(start)+'</b>. '
+      +'<button id="btnReset" type="button">Empezar de cero hoy</button>';
+    const r=document.getElementById('btnReset');
+    if(r)r.onclick=()=>{
+      borrarGuardado();
+      start=new Date(TODAY); wkMode='auto';
+      inp.value=toVal(start);
+      guardar(); renderAll();
+    };
+  } else {
+    el.className='estado ok';
+    el.innerHTML='Guardado en este dispositivo. Cuando vuelvas a abrir la página, seguirá aquí.';
+  }
+}
+
+function cargar(){
+  const d=leerAlmacen();
+  let restaurado=false;
+  if(d&&d.inicio&&/^\d{4}-\d{2}-\d{2}$/.test(d.inicio)){
+    const f=parseD(d.inicio);
+    if(!isNaN(f)){ start=f; restaurado=true; }
+  }
+  if(d&&d.semana&&(d.semana==='auto'||(+d.semana>=1&&+d.semana<=12))) wkMode=String(d.semana);
+  inp.value=toVal(start);
+  renderAll();
+  if(restaurado)marcarEstado('restaurado');
+  else if(!almacenOK)marcarEstado();
+}
+cargar();
 </script>
 </body>
 </html>
