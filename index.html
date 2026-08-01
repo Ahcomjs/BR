@@ -229,6 +229,24 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
 .warn h3{color:var(--stitch);font-size:20px;margin-bottom:6px}
 .foot{margin-top:50px;border-top:3px solid var(--ink);padding:14px 0 60px;
   font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.pv{position:fixed;inset:0;z-index:120;background:rgba(20,27,30,.88);display:flex;flex-direction:column}
+.pv[hidden]{display:none}
+.pvbar{background:var(--ink);color:var(--paper);padding:10px clamp(12px,3vw,20px);
+  display:flex;gap:10px 16px;align-items:center;flex-wrap:wrap;border-bottom:3px solid var(--stitch)}
+.pvbar b{font-family:var(--disp);font-size:20px;font-weight:800}
+.pvbar span{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:#9fb0a6;
+  flex:1 1 200px;line-height:1.4}
+.pvbar button{background:var(--stitch);color:#fff;border:0;padding:9px 14px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.pvbar button.sec{background:transparent;border:1px solid #46514c;color:var(--paper)}
+.pvscroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:clamp(12px,3vw,28px)}
+.pvpage{background:#fff;color:#141B1E;width:210mm;max-width:100%;margin:0 auto;
+  padding:clamp(14px,4vw,16mm);box-shadow:0 6px 30px rgba(0,0,0,.4)}
+.pvpage .sh{border:0;padding:0;background:#fff}
+.pvpage .sht td.fill,.pvpage .sht td.tick{border:1px solid #b9c0b2;background:#fff}
+.pvnota{font-family:var(--mono);font-size:10.5px;line-height:1.6;color:#9fb0a6;
+  max-width:820px;margin:14px auto 0;text-align:center}
+.pvnota b{color:var(--paper)}
 .estado{font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;line-height:1.6;
   color:var(--soft);margin:14px 0 0;padding:9px 12px;border-left:3px solid var(--line);
   background:var(--card);display:none}
@@ -256,8 +274,11 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
 .dsh{fill:none;stroke:var(--stitch);stroke-width:3;stroke-dasharray:6 6;stroke-linecap:round}
 .fil{fill:var(--ink)}
 
+@page{size:A4 portrait;margin:0}
 @media print{
-  body{background:#fff}
+  body{background:#fff;padding:12mm 10mm}
+  .shell{padding-left:0;padding-right:0;max-width:none}
+  .pv{display:none!important}
   body.psheet .hero,body.psheet .foot,body.psheet .shell>section:not(#hoja){display:none!important}
   body.psheet #hoja{padding-top:0}
   body.psheet #hoja .seam,body.psheet #hoja .tools,body.psheet #hoja .lead,
@@ -273,7 +294,7 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
 
 <div class="shell">
 <header class="hero">
-  <span class="kicker" id="kick">12 SEMANAS · 5 DÍAS POR SEMANA</span>
+  <span class="kicker" id="kick">12 SEMANAS · LUNES A VIERNES</span>
   <h1>Ejercicios<br>de <em>baseball</em><br>para ganar agilidad de bateo y defensa</h1>
 </header>
 </div>
@@ -294,14 +315,14 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
 
 <section id="hoy">
   <div class="shead"><span class="n">01</span><h2>Qué me toca hoy</h2></div>
-  <p class="lead">Cambia la fecha de inicio arriba y todo el plan se recalcula: el calendario, la fase y la sesión de hoy.</p>
+  <p class="lead">Se entrena <strong>de lunes a viernes</strong>: cuatro días de gimnasio y uno de campo. El sábado y el domingo el plan para. Cambia la fecha de inicio arriba y todo se recalcula; si eliges un día que no es lunes, el arranque se mueve al lunes que corresponde.</p>
   <div class="today" id="todayCard"></div>
 </section>
 
 <section id="plan">
   <svg class="seam" viewBox="0 0 900 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8H900" stroke="#C8CEBE" stroke-width="1.5"/><g stroke="#B31E2E" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M8 2q6 6 0 12M36 2q6 6 0 12M64 2q6 6 0 12M92 2q6 6 0 12M120 2q6 6 0 12"/></g></svg>
   <div class="shead"><span class="n">02</span><h2>Las siete sesiones</h2></div>
-  <p class="lead">Toca un día para verlo. Las series y repeticiones que ves corresponden a la fase seleccionada arriba, así que solo tienes un número que seguir, no una tabla que descifrar.</p>
+  <p class="lead">Toca un día para verlo. Se entrena de lunes a viernes; el sábado y el domingo el plan para. Las series y repeticiones que ves corresponden a la semana seleccionada arriba, así que solo tienes un número que seguir, no una tabla que descifrar.</p>
   <div class="tools">
     <button id="btnAll">Ver los 7 días seguidos</button>
     <button id="btnPrint">Imprimir o guardar en PDF</button>
@@ -314,7 +335,9 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
   <svg class="seam" viewBox="0 0 900 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8H900" stroke="#C8CEBE" stroke-width="1.5"/><g stroke="#B31E2E" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M8 2q6 6 0 12M36 2q6 6 0 12M64 2q6 6 0 12M92 2q6 6 0 12M120 2q6 6 0 12"/></g></svg>
   <div class="shead"><span class="n">03</span><h2>Hoja de la semana</h2></div>
   <p class="lead">Una sola página con los siete días de la semana que elijas arriba, ya con las series y repeticiones calculadas. Imprímela, dóblala y llévala al gimnasio: hay una casilla para anotar el peso que usaste y otra para marcar lo hecho.</p>
-  <div class="tools"><button id="btnSheet">Imprimir la hoja de esta semana</button></div>
+  <div class="tools">
+    <button id="btnSheet">Ver la hoja como se va a imprimir</button>
+  </div>
   <div id="sheet"></div>
 </section>
 
@@ -325,7 +348,7 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
   <div id="calendar"></div>
   <div class="key">
     <span><i style="background:var(--ink)"></i>Gimnasio</span>
-    <span><i style="background:var(--grass)"></i>Movilidad</span>
+    <span><i style="background:var(--grass)"></i>Fin de semana libre</span>
     <span><i style="background:var(--stitch)"></i>Campo</span>
     <span><i style="background:var(--line)"></i>Descanso</span>
   </div>
@@ -416,7 +439,7 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
 
 <section id="campo">
   <div class="shead"><span class="n">06</span><h2>El día de campo, sobre el terreno</h2></div>
-  <p class="lead">El miércoles conecta el gimnasio con la pelota. Siempre en este orden: primero lo explosivo, después lo técnico.</p>
+  <p class="lead">El viernes conecta el gimnasio con la pelota. Siempre en este orden: primero lo explosivo, después lo técnico.</p>
 
   <div class="chain">
     <svg viewBox="0 0 340 340" role="img" aria-label="Diagrama del terreno con las tres zonas de trabajo del día de campo">
@@ -506,8 +529,8 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
   <div class="grid2">
     <div class="card"><h3 style="font-size:18px">Sueño</h3><p style="font-size:14.5px;color:var(--soft)">De 7 a 9 horas. Es la variable con más impacto sobre la fuerza, el tiempo de reacción y el riesgo de lesión, por encima de cualquier suplemento.</p></div>
     <div class="card"><h3 style="font-size:18px">Proteína</h3><p style="font-size:14.5px;color:var(--soft)">Entre 1,6 y 2 g por kilo de peso al día, repartida en 3 o 4 comidas. Si pesas 75 kg, son unos 120 a 150 g diarios.</p></div>
-    <div class="card"><h3 style="font-size:18px">Hidratación</h3><p style="font-size:14.5px;color:var(--soft)">Con el calor de aquí, empieza cada sesión ya hidratado y repón sal si sudas mucho. Come carbohidratos antes del Día 1 y del Día 6.</p></div>
-    <div class="card"><h3 style="font-size:18px">Si lanzas mucho</h3><p style="font-size:14.5px;color:var(--soft)">Recorta primero el trabajo de empuje del Día 2, nunca el de hombro y escápula. Lo que protege el brazo no se sacrifica.</p></div>
+    <div class="card"><h3 style="font-size:18px">Hidratación</h3><p style="font-size:14.5px;color:var(--soft)">Con el calor de aquí, empieza cada sesión ya hidratado y repón sal si sudas mucho. Come carbohidratos el lunes y el viernes, que son las sesiones más exigentes.</p></div>
+    <div class="card"><h3 style="font-size:18px">Si lanzas mucho</h3><p style="font-size:14.5px;color:var(--soft)">Recorta primero el trabajo de empuje del martes, nunca el de hombro y escápula. Lo que protege el brazo no se sacrifica.</p></div>
   </div>
 
   <div class="warn">
@@ -525,6 +548,16 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
     <p style="margin:0">Tal como pediste, no aparece en ninguna sesión. La cadena posterior queda cubierta con el <strong>empuje de cadera, la extensión de espalda a 45°, el curl femoral y la sentadilla búlgara</strong>: mismo estímulo de glúteo e isquiotibial, sin carga sobre la columna ni el riesgo técnico de la barra desde el piso.</p>
   </div>
 </section>
+
+<div class="pv" id="pv" hidden role="dialog" aria-modal="true" aria-label="Vista previa de impresión">
+  <div class="pvbar">
+    <b id="pvTit">Vista previa</b>
+    <span>Así queda en el papel. Nada se imprime hasta que pulses el botón.</span>
+    <button id="pvPrint">Imprimir o guardar en PDF</button>
+    <button id="pvClose" class="sec">Cerrar</button>
+  </div>
+  <div class="pvscroll"><div class="pvpage" id="pvPage"></div></div>
+</div>
 
 <p class="foot" id="foot"></p>
 </div>
@@ -824,6 +857,7 @@ pinch:{d:[
 <script>
 /* ===================== PROGRAMA ===================== */
 const PLAN=[
+/* 0 LUNES */
 {t:'Pierna y potencia rotacional',k:'gym',s:'Pierna',
  w:'Bicicleta o cuerda 3 min · cadera 90/90 con giros, 8 por lado · sentadilla en copa profunda 3×20 s · puente de glúteo 2×12 · rotación torácica en cuadrupedia, 8 por lado · caminata lateral con banda 2×10 m.',
  b:[
@@ -843,10 +877,11 @@ const PLAN=[
   {a:'pallof',n:'Pallof press',c:'La polea te quiere girar y tú no la dejas. Costillas abajo, sin arquear la espalda.',r:['3×10 por lado','3×10 por lado','3×8 por lado']}
  ]}]},
 
+/* 1 MARTES */
 {t:'Empuje y salud del hombro',k:'gym',s:'Empuje',
  w:'Aperturas con banda 2×15 · rotación externa a 90° 2×12 por lado · serie Y-T-W 2×8 de cada letra · flexión con protracción contra la pared 2×10 · círculos de muñeca y codo 30 s.',
  b:[
- {h:'Bloque A · Empuje',s:'De 2 a 3 minutos de descanso entre series.',e:[
+ {h:'Bloque A · Empuje',s:'De 2 a 3 minutos de descanso entre series. Hoy las piernas descansan de lo de ayer.',e:[
   {a:'dbbench',n:'Press de banca con mancuernas',c:'Con mancuernas y no con barra: el hombro se mueve libre y el rango es más natural para alguien que lanza.',r:['4×8','4×5','4×3']},
   {a:'landminepress',n:'Press landmine de pie, un brazo',c:'La barra apoyada en una esquina y empujas en diagonal. Es el empuje vertical más seguro para el hombro del pelotero.',r:['3×8 por lado','4×6 por lado','3×5 por lado']},
   {a:'pushup',n:'Flexiones con lastre o fondos asistidos',c:'Arriba del todo, empuja el suelo y separa las escápulas: ahí trabaja el serrato, que estabiliza el hombro al tirar.',r:['3×12','3×8 con lastre','3×8']}
@@ -861,27 +896,7 @@ const PLAN=[
   {a:'wristroll',n:'Rodillo de muñeca',c:'Sube y baja el peso enrollando la cuerda. Esa quemazón en el antebrazo es control del bate.',r:['3 subidas y bajadas','3 subidas y bajadas','3 subidas y bajadas']}
  ]}]},
 
-{t:'Recuperación activa',k:'mob',s:'Movilidad',
- w:'',
- b:[
- {h:'De 30 a 40 minutos',s:'No es un día libre disfrazado. El tejido se repara mejor con movimiento suave que con sofá.',e:[
-  {a:'mobility',n:'Cadera 90/90 con transiciones',c:'Sentado, con una pierna a 90° adelante y la otra a 90° al lado. Gira de un lado al otro sin ayudarte con las manos.',r:['10 por lado','10 por lado','10 por lado']}
- ]},
- {h:'El resto de la rutina',s:'',l:[
-  'Caminata rápida o bicicleta suave, 20 minutos',
-  'Rodillo de espuma en cuádriceps, glúteo, dorsal y gemelo: 1 minuto por zona',
-  'Estiramiento del flexor de cadera en zancada, 3×30 s por lado',
-  'Rotación torácica sentado sobre los talones, 10 por lado',
-  'Estiramiento del durmiente para el hombro de tirar, 3×30 s',
-  'Respiración 4-7-8 tumbado, 5 minutos'
- ]},
- {h:'Opcional, solo si el cuerpo está bien',s:'',l:[
-  'De 50 a 75 swings de técnica en seco, sin bate lastrado, frente al espejo',
-  'Soft toss ligero, 2 series de 15',
-  'Juego de manos con guante, 10 minutos',
-  'Si tienes juego este día, ese es tu día 3 y no haces nada más'
- ]}]},
-
+/* 2 MIERCOLES */
 {t:'Unilateral y primer paso',k:'gym',s:'Unilateral',
  w:'Trote suave 3 min · escalera de agilidad, 4 patrones × 2 pasadas · sentadilla con peso corporal 2×12 · caminata lateral con banda 2×10 m · saltitos de tobillo 2×20.',
  b:[
@@ -889,7 +904,7 @@ const PLAN=[
   {a:'latbound',n:'Salto lateral a una pierna con aterrizaje congelado',c:'Aterriza y quédate quieto dos segundos. Esto es exactamente el primer paso hacia un roletazo a tu izquierda.',r:['3×5 por lado','4×5 por lado','4×4 por lado']},
   {a:'boxjump',n:'Salto al cajón',c:'Sube saltando y baja caminando. Nunca aterrices en el piso desde arriba: eso es carga sin beneficio.',r:['3×5','4×4','4×3 · añade salto en profundidad desde 30 cm']}
  ]},
- {h:'Bloque B · Fuerza unilateral',s:'Una pierna a la vez, que es como se juega la pelota.',e:[
+ {h:'Bloque B · Fuerza unilateral',s:'Una pierna a la vez, que es como se juega la pelota. Han pasado 48 horas desde el lunes: si todavía sientes las piernas muy cargadas, baja una serie de cada ejercicio.',e:[
   {a:'bulgarian',n:'Sentadilla búlgara',c:'El pie de atrás elevado en el banco. Torso ligeramente adelante para cargar el glúteo y no la rodilla.',r:['3×10 por lado','4×6 por lado','3×5 por lado']},
   {a:'latlunge',n:'Zancada lateral con mancuerna',c:'Cadera hacia atrás y rodilla alineada con el pie. Trabaja el rango lateral que usas en el cuadro.',r:['3×10 por lado','3×8 por lado','3×8 por lado']},
   {a:'stepup',n:'Subida al cajón a la altura de la rodilla',c:'Sube empujando con el talón del pie de arriba, sin darte impulso con el de abajo.',r:['3×8 por lado','3×8 por lado','3×6 por lado']},
@@ -900,10 +915,11 @@ const PLAN=[
   {a:'hollow',n:'Hollow hold',c:'La zona lumbar pegada al piso, sin arquear. Solo la baja espalda toca el suelo.',r:['3×30 s','3×30 s','3×30 s']}
  ]}]},
 
+/* 3 JUEVES */
 {t:'Tracción, agarre y core rotacional',k:'gym',s:'Tracción',
  w:'Remo suave o cuerda 3 min · aperturas con banda 2×15 · colgarse de la barra 2×20 s · dislocaciones de hombro con palo 2×10 · activación de dorsal en polea 2×12.',
  b:[
- {h:'Bloque A · Tracción',s:'Tira al menos tanto como empujas. Es lo que equilibra el hombro.',e:[
+ {h:'Bloque A · Tracción',s:'Tira al menos tanto como empujas. Es lo que equilibra el hombro. Hoy las piernas descansan para llegar frescas al viernes.',e:[
   {a:'pullup',n:'Dominadas o jalón al pecho',c:'Si no salen limpias, usa banda o el jalón. Baja controlado en tres segundos.',r:['4× las que salgan · objetivo 8','4×6 con lastre','3×5 con lastre']},
   {a:'row',n:'Remo con barra o mancuerna a un brazo',c:'Tronco firme y sin balancearte. Tira hacia la cadera, no hacia el pecho.',r:['4×10','4×6','3×6']},
   {a:'invrow',n:'Remo invertido en barra baja',c:'Cuerpo en línea recta del talón a la cabeza. Aprieta las escápulas arriba.',r:['3×12','3×10','3×10']}
@@ -917,6 +933,7 @@ const PLAN=[
   {a:'pinch',n:'Pinza de discos',c:'Dos discos lisos juntos, sostenidos solo con los dedos. Termina con flexión y extensión de muñeca, 3×15 en cada dirección.',r:['3×25 s por mano','3×25 s por mano','3×25 s por mano']}
  ]}]},
 
+/* 4 VIERNES */
 {t:'Campo: velocidad, guante y bate',k:'field',s:'Campo',
  w:'Trote 5 min · movilidad dinámica de cadera y tobillo · escalera de agilidad · 10 tiros progresivos, de corta a larga distancia.',
  b:[
@@ -941,14 +958,36 @@ const PLAN=[
   'Soft toss frontal: 3×10, buscando que la cadera se abra antes que las manos',
   'Práctica de bateo en vivo: 20 swings en Fase 1, 30 en Fase 2 y 3',
   'Cuenta cuántos batazos salen de línea o con buen ángulo, no cuántos pegas',
-  'Solo en Fase 3: bate sobrecargado y aligerado, 5 con el pesado, 5 con el ligero y 5 con el normal. Nunca antes de un juego'
+  'Solo en Fase 3: bate sobrecargado y aligerado, 5 con el pesado, 5 con el ligero y 5 con el normal. Nunca antes de un juego',
+  'Si tienes juego el sábado: corta los sprints a la mitad y quédate en tee y soft toss. Llegar con las piernas frescas vale más que la sesión completa'
  ]}]},
 
+/* 5 SABADO */
+{t:'Fin de semana · sin gimnasio',k:'mob',s:'Libre',w:'',
+ b:[
+ {h:'Hoy no se entrena',s:'El sábado y el domingo el plan para. Lo que sigue es opcional, se hace en casa en 20 o 30 minutos y no cuenta como entrenamiento: solo ayuda a que llegues suelto al lunes.',e:[
+  {a:'mobility',n:'Cadera 90/90 con transiciones',c:'Sentado, con una pierna a 90° adelante y la otra a 90° al lado. Gira de un lado al otro sin ayudarte con las manos. Es el ejercicio que más rinde para abrir la cadera en el swing.',r:['10 por lado','10 por lado','10 por lado']}
+ ]},
+ {h:'Si te apetece moverte, nada de esto es obligatorio',s:'',l:[
+  'Caminata tranquila, 20 o 30 minutos',
+  'Rodillo de espuma en cuádriceps, glúteo, dorsal y gemelo: 1 minuto por zona',
+  'Estiramiento del flexor de cadera en zancada, 3×30 s por lado',
+  'Estiramiento del durmiente para el hombro de tirar, 3×30 s',
+  'De 50 a 75 swings de técnica en seco, sin bate lastrado, frente al espejo'
+ ]},
+ {h:'Si tienes juego este fin de semana',s:'',l:[
+  'El juego sustituye por completo a todo lo de arriba',
+  'Calienta con la rutina de banda del martes antes de tirar',
+  'Después del juego, camina 10 minutos y estira suave: nada más'
+ ]}]},
+
+/* 6 DOMINGO */
 {t:'Descanso total',k:'off',s:'Descanso',w:'',
- b:[{h:'Hoy no entrenas',s:'',l:[
+ b:[{h:'Hoy no haces nada',s:'',l:[
   'Sin gimnasio, sin sprints y sin swings',
   'Camina si te apetece y estira 10 minutos si el cuerpo lo pide',
-  'Duerme bien: la adaptación no ocurre mientras entrenas, ocurre hoy'
+  'Duerme bien: la adaptación no ocurre mientras entrenas, ocurre hoy',
+  'Mañana es lunes y toca pierna: come bien esta noche'
  ]}]}
 ];
 
@@ -991,7 +1030,18 @@ function svgFor(k){
 
 /* ===================== ESTADO ===================== */
 const TODAY=new Date();TODAY.setHours(12,0,0,0);
-let start=new Date(TODAY);
+/* El plan entrena de lunes a viernes, asi que toda semana arranca en lunes.
+   Sabado y domingo se mueven al lunes siguiente; de martes a viernes se toma
+   el lunes de esa misma semana, para poder empezar a mitad de semana. */
+function toMonday(d){
+  const x=new Date(d), g=x.getDay();
+  if(g===0)x.setDate(x.getDate()+1);
+  else if(g===6)x.setDate(x.getDate()+2);
+  else x.setDate(x.getDate()-(g-1));
+  x.setHours(12,0,0,0);
+  return x;
+}
+let start=toMonday(TODAY);
 let wkMode='auto';
 let sel=0, showAll=false;
 
@@ -1023,7 +1073,7 @@ function vidURL(n){return 'https://www.youtube.com/results?search_query='+encode
 /* ===================== RENDER ===================== */
 function renderToday(){
   const o=offsetToday(), el=document.getElementById('todayCard'), ph=curPhase();
-  let num,tit,meta,txt,btn=true;
+  let num,tit,meta,txt,btn=true,etiquetaBoton='Ver la sesión completa';
   if(o<0){
     const f=-o;
     num='—';tit='Todavía no empieza';
@@ -1037,19 +1087,29 @@ function renderToday(){
     btn=false;
   } else {
     const w=Math.floor(o/7)+1, d=o%7, S=PLAN[d];
-    num=String(d+1);tit=S.t;
-    meta='Semana '+w+' de 12 · Fase '+(phaseOf(w)+1)+' · '+fLong(TODAY);
-    txt=isDeload(w)
-      ? (w===12?'Semana 12: la de cierre. Baja el volumen un 40 % y guarda energía para las pruebas finales del día de campo.'
-               :'Semana de descarga. Mismos ejercicios, la mitad de las series y sin acercarte al fallo. Esta semana es la que te deja asimilar las tres anteriores.')
-      : ['Fase de cimientos: series largas, peso moderado y técnica limpia por encima de todo.',
-         'Fase de fuerza: menos repeticiones y más kilos. Deja siempre dos repeticiones buenas en el tanque.',
-         'Fase de potencia: carga media movida lo más rápido posible. Si una repetición se ve lenta, baja el peso.'][phaseOf(w)];
-    sel=d;
+    num=(d<5)?String(d+1):'—';tit=S.t;
+    if(d>=5){
+      /* fin de semana: no se entrena, no tiene sentido hablar de cargas */
+      meta='Semana '+w+' de 12 · fin de semana · '+fLong(TODAY);
+      txt=(d===5)
+        ? 'Hoy y mañana el plan para. Si tienes juego, el juego es todo lo que haces. Si no, camina un rato y estira suave: el lunes toca pierna y potencia rotacional.'
+        : 'Descanso total. La adaptación de toda la semana ocurre hoy, no en el gimnasio. Mañana lunes arranca la semana '+(w<12?w+1:12)+' con pierna y potencia rotacional.';
+      etiquetaBoton='Ver lo que toca el lunes';
+      sel=0;
+    } else {
+      meta='Semana '+w+' de 12 · Fase '+(phaseOf(w)+1)+' · '+fLong(TODAY);
+      txt=isDeload(w)
+        ? (w===12?'Semana 12: la de cierre. Baja el volumen un 40 % y guarda energía para las pruebas finales del viernes.'
+                 :'Semana de descarga. Mismos ejercicios, la mitad de las series y sin acercarte al fallo. Esta semana es la que te deja asimilar las tres anteriores.')
+        : ['Fase de cimientos: series largas, peso moderado y técnica limpia por encima de todo.',
+           'Fase de fuerza: menos repeticiones y más kilos. Deja siempre dos repeticiones buenas en el tanque.',
+           'Fase de potencia: carga media movida lo más rápido posible. Si una repetición se ve lenta, baja el peso.'][phaseOf(w)];
+      sel=d;
+    }
   }
   el.innerHTML='<div class="big"><span>'+num+'</span></div><div>'
     +'<div class="meta">'+meta+'</div><h3>'+tit+'</h3><p>'+txt+'</p>'
-    +(btn?'<button class="go" id="goSess">Ver la sesión completa</button>':'')+'</div>';
+    +(btn?'<button class="go" id="goSess">'+etiquetaBoton+'</button>':'')+'</div>';
   const g=document.getElementById('goSess');
   if(g)g.onclick=()=>{showAll=false;renderDaybar();renderSessions();
     document.getElementById('plan').scrollIntoView({behavior:'smooth'});};
@@ -1058,16 +1118,17 @@ function renderToday(){
 function renderDaybar(){
   const bar=document.getElementById('daybar'), o=offsetToday();
   const todayIdx=(o>=0&&o<84)?o%7:-1;
-  bar.innerHTML=PLAN.map((S,i)=>
-    '<button data-i="'+i+'" aria-pressed="'+(!showAll&&i===sel)+'"'+(i===todayIdx?' class="is-today"':'')+'>'
-    +'<b>Día '+(i+1)+'</b><small>'+DOW[addD(start,i).getDay()]+' · '+S.s+'</small></button>').join('');
+  bar.innerHTML=PLAN.map((S,i)=>{
+    const dia=DOW[addD(start,i).getDay()];
+    return '<button data-i="'+i+'" aria-pressed="'+(!showAll&&i===sel)+'"'+(i===todayIdx?' class="is-today"':'')+'>'
+    +'<b>'+dia.charAt(0).toUpperCase()+dia.slice(1)+'</b><small>'+(i<5?'Sesión '+(i+1)+' · '+S.s:'Libre')+'</small></button>';}).join('');
   bar.querySelectorAll('button').forEach(b=>b.onclick=()=>{sel=+b.dataset.i;showAll=false;renderDaybar();renderSessions();});
 }
 
 function sessionHTML(i){
   const S=PLAN[i], ph=curPhase();
   let h='<article class="sess"><header class="'+KCL[S.k]+'"><div class="dmk"><span>'+(i+1)+'</span></div>'
-   +'<div><span class="when">Día '+(i+1)+' · '+DOW[addD(start,i).getDay()]+'</span><h3>'+S.t+'</h3></div></header><div class="sbody">';
+   +'<div><span class="when">'+DOW[addD(start,i).getDay()]+(i<5?' · sesión '+(i+1)+' de 5':' · sin gimnasio')+'</span><h3>'+S.t+'</h3></div></header><div class="sbody">';
   const wk=curWeekNum();
   if(S.k==='mob'&&isDeload(wk))
     h+='<div class="wknote"><b>Semana '+wk+' de 12 · descarga</b>Este día no cambia en las semanas de descarga: la recuperación activa se hace igual que siempre.</div>';
@@ -1114,9 +1175,9 @@ function renderCalendar(){
   }
   box.innerHTML=h;
   document.getElementById('calLead').textContent=
-    'Del '+fLong(start)+' al '+fLong(addD(start,83))+'. Las semanas 4 y 8 son de descarga: los mismos ejercicios con la mitad del volumen, para que el cuerpo asimile lo anterior.';
+    'Del '+fLong(start)+' al '+fLong(addD(start,83))+'. Cada semana va de lunes a viernes; los dos últimos recuadros de cada fila son el fin de semana libre. Las semanas 4 y 8 son de descarga: los mismos ejercicios con la mitad del volumen.';
   document.getElementById('kick').textContent=
-    (fShort(start)+' — '+fShort(addD(start,83))+' · 12 semanas · 5 días por semana').toUpperCase();
+    (fShort(start)+' — '+fShort(addD(start,83))+' · 12 semanas · lunes a viernes').toUpperCase();
   document.getElementById('foot').textContent=
     'Plan de 12 semanas · '+fFull(start)+' — '+fFull(addD(start,83));
 }
@@ -1133,7 +1194,8 @@ function renderSheet(){
   PLAN.forEach((S,i)=>{
     const d=addD(start,(wk-1)*7+i), rows=[], extra=[];
     S.b.forEach(B=>{ if(B.e)B.e.forEach(x=>rows.push([x.n,repFor(x,ph,wk)])); if(B.l)B.l.forEach(t=>extra.push(t)); });
-    h+='<div class="shd"><h4>Día '+(i+1)+' · '+S.t+' <em>'+DOW[d.getDay()]+' '+fShort(d)+'</em></h4>';
+    const dn=DOW[d.getDay()];
+    h+='<div class="shd"><h4>'+dn.charAt(0).toUpperCase()+dn.slice(1)+' · '+S.t+' <em>'+fShort(d)+'</em></h4>';
     if(rows.length){
       h+='<div class="tw"><table class="sht"><thead><tr><th>Ejercicio</th><th style="width:25%">Haz esto</th><th>Peso que usé</th><th>Hecho</th></tr></thead><tbody>';
       rows.forEach(r=>h+='<tr><td>'+r[0]+'</td><td class="mono">'+r[1]+'</td><td class="fill"></td><td class="tick"></td></tr>');
@@ -1160,16 +1222,38 @@ const inp=document.getElementById('start');
 inp.value=toVal(start);
 inp.addEventListener('change',()=>{
   if(!inp.value)return;
-  start=parseD(inp.value);
+  const pedido=parseD(inp.value);
+  if(isNaN(pedido))return;
+  start=toMonday(pedido);
+  const movido=toVal(pedido)!==toVal(start);
+  inp.value=toVal(start);
   guardar();renderAll();
+  if(movido)marcarEstado('ajustado',pedido);
 });
 document.getElementById('wkSel').onchange=e=>{
   wkMode=e.target.value;guardar();renderSessions();renderSheet();
 };
-document.getElementById('btnSheet').onclick=()=>{
+/* Vista previa: primero se ve, y solo se imprime si el usuario lo pide */
+const pv=document.getElementById('pv');
+function abrirPreview(){
+  document.getElementById('pvPage').innerHTML=document.getElementById('sheet').innerHTML
+    +'<div class="pvnota" style="color:#55625B;text-align:left;margin-top:18px">'
+    +'Si al imprimir aparece la dirección del archivo o la fecha en el borde, desmarca '
+    +'<b style="color:#141B1E">Encabezados y pies de página</b> en el cuadro de impresión.</div>';
+  document.getElementById('pvTit').textContent='Vista previa · semana '+curWeekNum();
+  pv.hidden=false;
+  document.body.style.overflow='hidden';
+  document.getElementById('pvClose').focus();
+}
+function cerrarPreview(){pv.hidden=true;document.body.style.overflow='';}
+document.getElementById('btnSheet').onclick=abrirPreview;
+document.getElementById('pvClose').onclick=cerrarPreview;
+document.getElementById('pvPrint').onclick=()=>{
   document.body.classList.add('psheet');
   setTimeout(()=>{window.print();document.body.classList.remove('psheet');},120);
 };
+pv.addEventListener('click',e=>{if(e.target===pv)cerrarPreview();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!pv.hidden)cerrarPreview();});
 document.getElementById('btnAll').onclick=()=>{showAll=!showAll;renderDaybar();renderSessions();};
 document.getElementById('btnPrint').onclick=()=>{
   const prev=showAll;showAll=true;renderSessions();
@@ -1177,7 +1261,7 @@ document.getElementById('btnPrint').onclick=()=>{
 };
 
 /* ===================== GUARDADO EN localStorage ===================== */
-const LS_KEY='planBeisbol.v1';
+const LS_KEY='planBeisbol.v2';
 let memoria={};                 // respaldo si el navegador bloquea localStorage
 let almacenOK=true;
 
@@ -1210,6 +1294,12 @@ function marcarEstado(tipo,fechaGuardada){
       +'La fecha funcionará mientras tengas la página abierta, pero se perderá al cerrarla.';
     return;
   }
+  if(tipo==='ajustado'){
+    el.className='estado warn2';
+    el.innerHTML='Elegiste el <b>'+fLong(fechaGuardada)+'</b>. Como el plan entrena de lunes a viernes, '
+      +'moví el arranque al <b>'+fLong(start)+'</b>.';
+    return;
+  }
   if(tipo==='restaurado'){
     el.className='estado';
     el.innerHTML='Retomando tu plan guardado: empezaste el <b>'+fLong(start)+'</b>. '
@@ -1217,7 +1307,7 @@ function marcarEstado(tipo,fechaGuardada){
     const r=document.getElementById('btnReset');
     if(r)r.onclick=()=>{
       borrarGuardado();
-      start=new Date(TODAY); wkMode='auto';
+      start=toMonday(TODAY); wkMode='auto';
       inp.value=toVal(start);
       guardar(); renderAll();
     };
@@ -1232,7 +1322,7 @@ function cargar(){
   let restaurado=false;
   if(d&&d.inicio&&/^\d{4}-\d{2}-\d{2}$/.test(d.inicio)){
     const f=parseD(d.inicio);
-    if(!isNaN(f)){ start=f; restaurado=true; }
+    if(!isNaN(f)){ start=toMonday(f); restaurado=true; }
   }
   if(d&&d.semana&&(d.semana==='auto'||(+d.semana>=1&&+d.semana<=12))) wkMode=String(d.semana);
   inp.value=toVal(start);
