@@ -81,6 +81,25 @@ section{padding-top:clamp(34px,6vw,58px);scroll-margin-top:64px}
 .today h3{font-size:clamp(22px,4.6vw,34px);margin:4px 0 6px}
 .today .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#9fb0a6}
 .today p{margin:0;color:#c8d2cb;font-size:15px}
+.ayer{background:var(--ink);color:var(--paper);padding:16px 18px;margin-top:12px}
+.ayer b{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;display:block;margin-bottom:6px}
+.ayer .ayerTxt{font-size:14px;color:#c8d2cb;margin:0 0 12px}
+.ayer .ayerTxt strong{color:#fff}
+.ayerBtns{display:flex;gap:8px;flex-wrap:wrap}
+.ayerBtns button{background:transparent;border:1px solid #46514c;color:var(--paper);
+  padding:8px 12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.ayerBtns button[aria-pressed="true"]{background:var(--stitch);border-color:var(--stitch)}
+.ayerRes{font-size:14.5px;margin:12px 0 0;padding-top:12px;border-top:1px solid #33403a;color:#c8d2cb}
+.ayerRes:empty{display:none}
+.ayerRes strong{color:#fff}
+.ayerRes .warn3{color:#ff9aa5}
+@media print{.ayer{display:none!important}}
+.ajuste{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--grass);
+  padding:14px 16px;margin-top:12px;font-size:14.5px;color:var(--soft)}
+.ajuste b{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grass);display:block;margin-bottom:6px}
+.ajuste strong{color:var(--ink)}
 .today .go{display:inline-block;margin-top:10px;background:var(--stitch);color:#fff;
   border:0;padding:8px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 @media(max-width:520px){.today{grid-template-columns:1fr}.today .big{margin-bottom:4px}}
@@ -174,7 +193,11 @@ ul.tk li{margin-bottom:6px}
 .wkd .m{border-left:3px solid var(--grass)}
 .wkd .f{border-left:3px solid var(--stitch)}
 .wkd .o{border-left:3px solid var(--line)}
+.wkd .tor{background:var(--stitch);border-left-color:var(--stitch)}
+.wkd .tor .dt{color:rgba(255,255,255,.8)}
+.wkd .tor .nm{color:#fff;letter-spacing:.04em}
 .wkd .now{background:var(--ink)}
+.wkd .now.tor{background:var(--stitch)}
 .wkd .now .dt{color:#9fb0a6}
 .wkd .now .nm{color:var(--paper)}
 .key{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-family:var(--mono);font-size:10px;
@@ -245,7 +268,12 @@ tbody tr:nth-child(even) td{background:rgba(44,90,59,.05)}
 .pvbar button.sec{background:transparent;border:1px solid #46514c;color:var(--paper)}
 .pvscroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:clamp(12px,3vw,28px)}
 .pvpage{background:#fff;color:#141B1E;width:210mm;max-width:100%;margin:0 auto;
-  padding:clamp(14px,4vw,16mm);box-shadow:0 6px 30px rgba(0,0,0,.4)}
+  padding:clamp(14px,4vw,16mm);box-shadow:0 6px 30px rgba(0,0,0,.4);
+  outline:2px dashed rgba(179,30,46,.55);outline-offset:-1px;overflow-wrap:anywhere}
+.pvedge{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:#9fb0a6;text-align:center;width:210mm;max-width:100%;margin:0 auto 8px}
+.pvedge:last-child{margin:8px auto 0}
+.pvscroll{overflow-x:hidden}
 .pvpage .sh{border:0;padding:0;background:#fff}
 body.tinta .pvpage,body.tinta .pvpage *{color:#000;background-color:transparent}
 body.tinta .pvpage .shh{border-bottom:2px solid #000}
@@ -288,14 +316,25 @@ body.tinta .pvpage .shnotes{border-top:2px solid #000}
 
 @page{size:A4 portrait;margin:0}
 @media print{
-  body{background:#fff;padding:12mm 9mm}
+  body{background:#fff;padding:12mm 12mm}
   .shell{padding-left:0;padding-right:0;max-width:none}
   .pv{display:none!important}
   /* la tabla nunca puede desbordar la hoja */
   .tw{overflow:visible!important}
   .sht{table-layout:fixed!important;width:100%!important;min-width:0!important;font-size:11.5px}
-  .sht td,.sht th{padding:4px 5px!important;overflow-wrap:anywhere}
-  .shd h4{font-size:14px}
+  .sht td,.sht th{padding:3px 5px!important;overflow-wrap:anywhere;font-size:10.8px}
+  .sht th{font-size:8.5px}
+  .shh b{font-size:22px}
+  .shn{font-size:10.5px;margin-top:6px}
+  .shtip{font-size:9.8px;padding:6px 9px;margin-top:7px}
+  .shp{font-size:10px;margin-top:4px}
+  .shd{margin-top:11px}
+  .shnotes{margin-top:12px;padding-top:7px}
+  .shnotes i{height:17px}
+  #hoja,#hoja *{max-width:100%!important}
+  #hoja p,#hoja h4,#hoja td,#hoja th,#hoja li,#hoja span{
+    overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
+  .shd h4{font-size:12.5px;padding-bottom:2px;margin-bottom:1px}
 
   /* ---- AHORRO DE TINTA: todo en negro, sin fondos ---- */
   body.tinta *{color:#000!important;background-color:transparent!important;
@@ -320,7 +359,26 @@ body.tinta .pvpage .shnotes{border-top:2px solid #000}
   body.psheet #hoja .shead .n{display:none!important}
   body.psheet .sh{border:0;padding:0;background:#fff}
   body.psheet .sht td.fill,body.psheet .sht td.tick{border:1px solid #bbb}
-  .bar,.tools,.daybar,.today .go{display:none!important}
+  .bar,.tools,.daybar,.ayer{background:var(--ink);color:var(--paper);padding:16px 18px;margin-top:12px}
+.ayer b{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:#fff;display:block;margin-bottom:6px}
+.ayer .ayerTxt{font-size:14px;color:#c8d2cb;margin:0 0 12px}
+.ayer .ayerTxt strong{color:#fff}
+.ayerBtns{display:flex;gap:8px;flex-wrap:wrap}
+.ayerBtns button{background:transparent;border:1px solid #46514c;color:var(--paper);
+  padding:8px 12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.ayerBtns button[aria-pressed="true"]{background:var(--stitch);border-color:var(--stitch)}
+.ayerRes{font-size:14.5px;margin:12px 0 0;padding-top:12px;border-top:1px solid #33403a;color:#c8d2cb}
+.ayerRes:empty{display:none}
+.ayerRes strong{color:#fff}
+.ayerRes .warn3{color:#ff9aa5}
+@media print{.ayer{display:none!important}}
+.ajuste{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--grass);
+  padding:14px 16px;margin-top:12px;font-size:14.5px;color:var(--soft)}
+.ajuste b{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--grass);display:block;margin-bottom:6px}
+.ajuste strong{color:var(--ink)}
+.today .go{display:none!important}
   .sess,.exc,.wk,.card{break-inside:avoid}
   section{padding-top:20px}
 }
@@ -330,13 +388,14 @@ body.tinta .pvpage .shnotes{border-top:2px solid #000}
 <div class="shell">
 <header class="hero">
   <span class="kicker" id="kick">12 SEMANAS · LUNES A VIERNES</span>
-  <h1>Ejercicios<br>de <em>baseball</em><br>para ganar agilidad de bateo y defensa</h1>
+  <h1>Todo el<br>plan al <em>poder</em><br>de bateo</h1>
+  <p class="sub">Un pico de cuatro bloques hasta el día del torneo, montado sobre máquinas de gimnasio común. Todo apunta a lo mismo: que la pelota salga más dura.</p>
 </header>
 </div>
 
 <div class="bar">
   <div class="barin">
-    <label class="fld"><span>Empiezo el</span><input type="date" id="start"></label>
+    <label class="fld"><span>Torneo el</span><input type="date" id="start"></label>
     <label class="fld"><span>Semana</span><select id="wkSel"></select></label>
     <nav class="jump">
       <a href="#hoy">Hoy</a><a href="#plan">Sesiones</a><a href="#hoja">Hoja</a><a href="#cal">Calendario</a>
@@ -350,14 +409,25 @@ body.tinta .pvpage .shnotes{border-top:2px solid #000}
 
 <section id="hoy">
   <div class="shead"><span class="n">01</span><h2>Qué me toca hoy</h2></div>
-  <p class="lead">Se entrena <strong>de lunes a viernes</strong>: cuatro días de gimnasio y uno de campo. El sábado y el domingo el plan para. Cambia la fecha de inicio arriba y todo se recalcula; si eliges un día que no es lunes, el arranque se mueve al lunes que corresponde.</p>
+  <p class="lead">Pon arriba la fecha de tu torneo y el plan se recalcula solo: cuantos menos días falten, menos volumen y más velocidad. Se entrena <strong>de lunes a viernes</strong>; el fin de semana para.</p>
   <div class="today" id="todayCard"></div>
+  <div class="ayer" id="ayerBox">
+    <b>¿Qué entrenaste ayer?</b>
+    <p class="ayerTxt">Dímelo y ajusto la sesión de hoy. La regla que protege el plan: <strong>nunca dos días de pierna seguidos</strong>, mínimo 48 horas entre uno y otro.</p>
+    <div class="ayerBtns" id="ayerBtns"></div>
+    <p class="ayerRes" id="ayerRes"></p>
+  </div>
+  <div class="ajuste" id="ajuste">
+    <b>Si te saltaste un día</b>
+    <p>El orden importa por una razón: entre los dos días de pierna (lunes y jueves) tiene que haber al menos 48 horas. Si un día se cae, <strong>no lo recuperes doblando</strong>: sáltalo y sigue por donde toca. A tres semanas del torneo, acumular fatiga te quita más de lo que te da entrenar de más.</p>
+    <p style="margin:0">Regla rápida: <strong>si entrenaste pierna ayer, hoy toca superior o rotación.</strong> Nunca dos días de pierna seguidos.</p>
+  </div>
 </section>
 
 <section id="plan">
   <svg class="seam" viewBox="0 0 900 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8H900" stroke="#C8CEBE" stroke-width="1.5"/><g stroke="#B31E2E" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M8 2q6 6 0 12M36 2q6 6 0 12M64 2q6 6 0 12M92 2q6 6 0 12M120 2q6 6 0 12"/></g></svg>
   <div class="shead"><span class="n">02</span><h2>Las siete sesiones</h2></div>
-  <p class="lead">Toca un día para verlo. Se entrena de lunes a viernes; el sábado y el domingo el plan para. Las series y repeticiones que ves corresponden a la semana seleccionada arriba, así que solo tienes un número que seguir, no una tabla que descifrar.</p>
+  <p class="lead">Toca un día para verlo. Las series y repeticiones se ajustan solas al bloque en que estés, así que solo tienes un número que seguir.</p>
   <div class="tools">
     <button id="btnAll">Ver los 7 días seguidos</button>
     <button id="btnPrint">Imprimir o guardar en PDF</button>
@@ -378,7 +448,7 @@ body.tinta .pvpage .shnotes{border-top:2px solid #000}
 
 <section id="cal">
   <svg class="seam" viewBox="0 0 900 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8H900" stroke="#C8CEBE" stroke-width="1.5"/><g stroke="#B31E2E" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M8 2q6 6 0 12M36 2q6 6 0 12M64 2q6 6 0 12M92 2q6 6 0 12M120 2q6 6 0 12"/></g></svg>
-  <div class="shead"><span class="n">04</span><h2>Las 12 semanas</h2></div>
+  <div class="shead"><span class="n">04</span><h2>Cuenta atrás</h2></div>
   <p class="lead" id="calLead"></p>
   <div id="calendar"></div>
   <div class="key">
@@ -527,32 +597,78 @@ body.tinta .pvpage .shnotes{border-top:2px solid #000}
   <svg class="seam" viewBox="0 0 900 16" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8H900" stroke="#C8CEBE" stroke-width="1.5"/><g stroke="#B31E2E" stroke-width="2.4" fill="none" stroke-linecap="round"><path d="M8 2q6 6 0 12M36 2q6 6 0 12M64 2q6 6 0 12M92 2q6 6 0 12M120 2q6 6 0 12"/></g></svg>
   <div class="shead"><span class="n">07</span><h2>Guía rápida</h2></div>
 
-  <h3 style="font-size:24px;margin:18px 0 8px">Las tres fases</h3>
-  <div class="grid3">
-    <div class="card"><span class="lbl">Semanas 1 a 4</span><h3>Cimientos</h3>
-      <p style="font-size:14.5px;color:var(--soft)">Estructura, movilidad y técnica limpia. Series largas y peso moderado. Vas a sentir que es poco: es a propósito.</p></div>
-    <div class="card"><span class="lbl">Semanas 5 a 8</span><h3>Fuerza</h3>
-      <p style="font-size:14.5px;color:var(--soft)">Menos repeticiones y más kilos. Aquí se construye la fuerza que después se convierte en velocidad.</p></div>
-    <div class="card"><span class="lbl">Semanas 9 a 12</span><h3>Potencia</h3>
-      <p style="font-size:14.5px;color:var(--soft)">Cargas medias movidas lo más rápido posible. Si una repetición se ve lenta, baja el peso.</p></div>
+  <h3 style="font-size:24px;margin:18px 0 8px">Cómo queda la semana</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:16%">Día</th><th style="width:30%">Sesión</th><th>Por qué va ahí</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lunes</strong></td><td>Pierna y cadera · fuerza máxima</td><td>Fresco de fin de semana: el día de más kilos</td></tr>
+      <tr><td><strong>Martes</strong></td><td>Rotación y antebrazo pesado</td><td>Piernas en reposo; el swing y el contacto a tope</td></tr>
+      <tr><td><strong>Miércoles</strong></td><td>Tren superior, brazo y antebrazo</td><td>Colchón entre los dos días de pierna</td></tr>
+      <tr><td><strong>Jueves</strong></td><td>Pierna explosiva, cadera lateral y agarre</td><td>72 horas desde el lunes: recuperado para ir rápido</td></tr>
+      <tr><td><strong>Viernes</strong></td><td>Campo: bate y velocidad</td><td>Sin carga pesada el día anterior, el bate sale más suelto</td></tr>
+    </tbody>
+  </table>
   </div>
-  <p style="font-size:14px;color:var(--soft);margin-top:12px">Las semanas 4 y 8 son de descarga: los mismos ejercicios con la mitad del volumen. La semana 12 baja un 40 % y cierra con las pruebas.</p>
+  <p style="font-size:14px;color:var(--soft);margin-top:10px"><strong>Dos días de pierna a la semana</strong>, separados por 72 horas: el lunes pesado para la fuerza y el jueves explosivo para convertirla en velocidad. Es el reparto que más fuerza de pierna deja en tres semanas sin que llegues quemado.</p>
 
-  <h3 style="font-size:24px;margin:30px 0 8px">Cómo elegir el peso</h3>
-  <div class="grid3">
-    <div class="card"><h3 style="font-size:18px">Semana 1</h3><p style="font-size:14.5px;color:var(--soft)">Un peso con el que podrías hacer <strong>2 o 3 repeticiones más</strong> de las que marca la tarjeta.</p></div>
-    <div class="card"><h3 style="font-size:18px">Cada semana</h3><p style="font-size:14.5px;color:var(--soft)">Si completaste todas las series limpias, sube <strong>2,5 a 5 kg</strong> en pierna y <strong>1 a 2,5 kg</strong> en tren superior.</p></div>
-    <div class="card"><h3 style="font-size:18px">Nunca al fallo</h3><p style="font-size:14.5px;color:var(--soft)">En los ejercicios principales termina siempre con <strong>2 repeticiones buenas de reserva</strong>.</p></div>
+  <h3 style="font-size:24px;margin:30px 0 8px">Los cuatro bloques</h3>
+  <div class="grid2">
+    <div class="card"><span class="lbl">Más de 3 semanas antes</span><h3>1 · Base explosiva</h3>
+      <p style="font-size:14.5px;color:var(--soft)">Aprendes las máquinas, fijas las cargas y despiertas la cadera. Nada al fallo.</p></div>
+    <div class="card"><span class="lbl">De 3 a 2 semanas antes</span><h3>2 · Fuerza máxima</h3>
+      <p style="font-size:14.5px;color:var(--soft)">Menos repeticiones y más kilos. Es la parte que construye los kilos que luego se convierten en velocidad.</p></div>
+    <div class="card"><span class="lbl">De 2 a 1 semana antes</span><h3>3 · Potencia</h3>
+      <p style="font-size:14.5px;color:var(--soft)">Bajas el peso y subes la velocidad. Series de contraste: pesado y justo después explosivo.</p></div>
+    <div class="card"><span class="lbl">Última semana</span><h3>4 · Afinado</h3>
+      <p style="font-size:14.5px;color:var(--soft)">Mitad de volumen y último día pesado el miércoles. Llegar fresco da más velocidad de bate que cualquier sesión extra.</p></div>
+  </div>
+  <div class="warn" style="border-color:var(--grass);background:rgba(44,90,59,.07)">
+    <h3 style="color:var(--grass)">La última semana, con el torneo en domingo</h3>
+    <p style="margin:0 0 8px">Como el torneo cae en <strong>domingo 30</strong>, la cuenta atrás queda así: el <strong>miércoles 26 es tu último día pesado</strong>. El jueves 27 haces el contraste suave, el viernes 28 solo campo y bate ligero, y el sábado 29 es víspera: movilidad, 20 swings en seco y a dormir. Nada más.</p>
+    <p style="margin:0">Ese sábado es el día que más gente estropea entrenando "una última sesión". No lo hagas: la fuerza que no puedes expresar por fatiga no te sirve el domingo.</p>
   </div>
 
-  <h3 style="font-size:24px;margin:30px 0 8px">Cinco números para saber si funciona</h3>
-  <p style="font-size:14.5px;color:var(--soft);max-width:60ch">Mídelos la primera semana, en la semana 6 y en la 12. Sin la medición del primer día no tienes con qué comparar al final.</p>
+  <div class="warn" style="border-color:var(--grass);background:rgba(44,90,59,.07)">
+    <h3 style="color:var(--grass)">Lo que sí y lo que no vas a ganar</h3>
+    <p style="margin:0 0 8px">En tres semanas <strong>sí puedes subir fuerza de verdad</strong>. La primera fuerza que llega no viene de músculo nuevo, sino del sistema nervioso: aprendes a reclutar más fibras a la vez y a hacerlo más rápido. Por eso es normal sumar entre un 5 y un 10 % en la prensa y en el jalón en este plazo, sobre todo si no llevabas meses entrenando pesado. Esa fuerza es real y se traduce en la pelota.</p>
+    <p style="margin:0 0 8px">Lo que <strong>no</strong> va a pasar en 18 días es ganar tamaño muscular apreciable: eso necesita meses y superávit de comida. Si alguien te promete kilos de músculo en tres semanas, te está vendiendo algo.</p>
+    <p style="margin:0">Así que el plan va con carga de verdad: series pesadas en prensa, hack, multipower, empuje de cadera, jalón y remo, subiendo peso cada semana. Y encima, las series de contraste para convertir esa fuerza en velocidad de bate. La única regla que no se negocia es la última: <strong>los tres días previos al torneo se baja</strong>, porque la fuerza que no puedes expresar por fatiga no sirve de nada.</p></div>
+
+  <h3 style="font-size:24px;margin:30px 0 8px">Cómo subir peso cada semana</h3>
+  <p style="font-size:14.5px;color:var(--soft);max-width:62ch">Esta es la parte que decide si ganas fuerza o solo haces bulto. Anota siempre lo que levantaste en la hoja: sin ese número no sabes cuánto subir.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th style="width:30%">Ejercicio</th><th style="width:34%">Si completaste todas las series</th><th>Si no llegaste</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Prensa de piernas</strong></td><td>Sube de 10 a 20 kg la próxima sesión</td><td>Repite el mismo peso</td></tr>
+      <tr><td><strong>Sentadilla hack y multipower</strong></td><td>Sube de 5 a 10 kg</td><td>Repite el mismo peso</td></tr>
+      <tr><td><strong>Empuje de cadera</strong></td><td>Sube de 5 a 10 kg</td><td>Repite</td></tr>
+      <tr><td><strong>Jalón, remo, press de pecho</strong></td><td>Sube de 2,5 a 5 kg</td><td>Repite</td></tr>
+      <tr><td><strong>Rotación en polea y torso</strong></td><td>Sube una placa solo si el giro sigue saliendo rápido</td><td>Baja una placa</td></tr>
+      <tr><td><strong>Curl de muñeca y antebrazo</strong></td><td>Sube 1 a 2,5 kg, o 2 repeticiones si no hay disco menor</td><td>Repite</td></tr>
+      <tr><td><strong>Abductores y aductores</strong></td><td>Sube una placa</td><td>Repite</td></tr>
+      <tr><td><strong>Colgarse de la barra</strong></td><td>Añade 5 segundos, o lastre al pasar del minuto</td><td>Repite</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:14px;color:var(--soft);margin-top:10px">Regla de oro: en el bloque 3 la velocidad manda sobre el peso. Si una repetición se ve lenta, quita carga aunque puedas moverla.</p>
+
+  <h3 style="font-size:24px;margin:30px 0 8px">Elegir el peso de partida</h3>
+  <div class="grid3">
+    <div class="card"><h3 style="font-size:18px">Bloques 1 y 2</h3><p style="font-size:14.5px;color:var(--soft)">Un peso con el que te sobren <strong>2 o 3 repeticiones</strong>. Si la semana sale limpia, sube algo en la prensa y la sentadilla.</p></div>
+    <div class="card"><h3 style="font-size:18px">Bloque 3</h3><p style="font-size:14.5px;color:var(--soft)">Manda la <strong>velocidad</strong>, no el peso. Si una repetición se ve lenta, quita carga aunque puedas moverla.</p></div>
+    <div class="card"><h3 style="font-size:18px">Nunca al fallo</h3><p style="font-size:14.5px;color:var(--soft)">Y menos aún este mes. Llegar con las piernas machacadas al torneo te quita más de lo que te da.</p></div>
+  </div>
+
+  <h3 style="font-size:24px;margin:30px 0 8px">Cómo saber si está funcionando</h3>
+  <p style="font-size:14.5px;color:var(--soft);max-width:60ch">Mídelos este viernes y otra vez el viernes antes del torneo. Con tan poco tiempo, el lanzamiento rotacional y la velocidad de salida son los que mejor avisan.</p>
   <div class="tw">
   <table>
     <thead><tr><th style="width:38%">Prueba</th><th>Qué te dice</th></tr></thead>
     <tbody>
       <tr><td><strong>Salto vertical o de longitud sin impulso</strong></td><td>Potencia general de piernas: la base del swing y del primer paso</td></tr>
-      <tr><td><strong>Distancia del lanzamiento rotacional con balón de 3 kg</strong></td><td>El indicador más directo de potencia rotacional aplicable al bate</td></tr>
+      <tr><td><strong>Distancia del lanzamiento rotacional con balón de 3 kg</strong></td><td>El aviso más temprano de que la potencia rotacional está subiendo</td></tr>
       <tr><td><strong>Tiempo de home a primera</strong></td><td>Aceleración real dentro del juego</td></tr>
       <tr><td><strong>Prueba 5-10-5</strong></td><td>Rango defensivo y capacidad de cambiar de dirección</td></tr>
       <tr><td><strong>Velocidad de salida de la pelota, si hay radar</strong></td><td>La medida final: cuánta de esa fuerza llegó al barril</td></tr>
@@ -564,23 +680,25 @@ body.tinta .pvpage .shnotes{border-top:2px solid #000}
   <div class="grid2">
     <div class="card"><h3 style="font-size:18px">Sueño</h3><p style="font-size:14.5px;color:var(--soft)">De 7 a 9 horas. Es la variable con más impacto sobre la fuerza, el tiempo de reacción y el riesgo de lesión, por encima de cualquier suplemento.</p></div>
     <div class="card"><h3 style="font-size:18px">Proteína</h3><p style="font-size:14.5px;color:var(--soft)">Entre 1,6 y 2 g por kilo de peso al día, repartida en 3 o 4 comidas. Si pesas 75 kg, son unos 120 a 150 g diarios.</p></div>
-    <div class="card"><h3 style="font-size:18px">Hidratación</h3><p style="font-size:14.5px;color:var(--soft)">Con el calor de aquí, empieza cada sesión ya hidratado y repón sal si sudas mucho. Come carbohidratos el lunes y el viernes, que son las sesiones más exigentes.</p></div>
-    <div class="card"><h3 style="font-size:18px">Si lanzas mucho</h3><p style="font-size:14.5px;color:var(--soft)">Recorta primero el trabajo de empuje del martes, nunca el de hombro y escápula. Lo que protege el brazo no se sacrifica.</p></div>
+    <div class="card"><h3 style="font-size:18px">Hidratación</h3><p style="font-size:14.5px;color:var(--soft)">Con el calor de aquí, empieza cada sesión ya hidratado y repón sal si sudas mucho. Come carbohidratos el lunes y el jueves, que son las sesiones más exigentes, y el domingo antes del torneo.</p></div>
+    <div class="card"><h3 style="font-size:18px">Si lanzas mucho</h3><p style="font-size:14.5px;color:var(--soft)">Recorta primero el press de pecho del miércoles, nunca el trabajo de hombro y escápula. Lo que protege el brazo no se sacrifica.</p></div>
   </div>
 
   <div class="warn">
     <h3>Cuándo parar</h3>
     <ul class="tk">
+      <li><strong>Los últimos tres días antes del torneo no se entrena pesado.</strong> Si llegas con agujetas, pierdes velocidad de bate.</li>
       <li>Dolor en la parte interna del codo o detrás del hombro al tirar: para el trabajo de brazo y revísalo antes de seguir.</li>
       <li>Molestia articular puntual y aguda durante un ejercicio: eso no son agujetas, cambia el ejercicio.</li>
-      <li>Dos semanas seguidas con los pesos bajando y sensación de estar plano: adelanta la descarga.</li>
+      <li>Dos sesiones seguidas con los pesos bajando y sensación de estar plano: salta al bloque de afinado antes de tiempo. Perder una semana de carga no te cuesta nada; llegar quemado al torneo sí.</li>
     </ul>
     <p style="margin:10px 0 0;font-size:14px">Este plan es orientación general de entrenamiento, no una evaluación médica. Si arrastras alguna lesión o tienes alguna condición de salud, revísalo con un médico deportivo o un fisioterapeuta antes de empezar.</p>
   </div>
 
   <div class="warn" style="border-color:var(--grass);background:rgba(44,90,59,.07)">
-    <h3 style="color:var(--grass)">Sin peso muerto</h3>
-    <p style="margin:0">Tal como pediste, no aparece en ninguna sesión. La cadena posterior queda cubierta con el <strong>empuje de cadera, la extensión de espalda a 45°, el curl femoral y la sentadilla búlgara</strong>: mismo estímulo de glúteo e isquiotibial, sin carga sobre la columna ni el riesgo técnico de la barra desde el piso.</p>
+    <h3 style="color:var(--grass)">Sin peso muerto, sin cajón y todo en máquinas</h3>
+    <p style="margin:0 0 8px">Tal como pediste. No hay cajón en ningún ejercicio: el salto al cajón lo sustituye el <strong>salto de longitud sin impulso</strong>, que mide igual de bien la potencia y solo necesita suelo; y la subida al cajón la sustituyen la <strong>prensa a una pierna</strong> y la <strong>búlgara con el pie en un banco</strong>. La cadena posterior queda cubierta con el <strong>empuje de cadera y el curl femoral sentado</strong>, y el trabajo pesado se hace en <strong>prensa, hack y multipower</strong>. Las máquinas además tienen una ventaja este mes: el recorrido guiado te deja empujar con todo sin gastar energía en estabilizar, y el riesgo de una lesión tonta a tres semanas del torneo baja mucho.</p>
+    <p style="margin:0">Lo único que no es máquina son los <strong>lanzamientos de balón medicinal</strong>, y esos no los quites: son lo más parecido a un swing con carga que existe y la palanca más directa que tienes sobre la velocidad del bate.</p>
   </div>
 </section>
 
@@ -592,7 +710,11 @@ body.tinta .pvpage .shnotes{border-top:2px solid #000}
     <button id="pvPrint">Imprimir o guardar en PDF</button>
     <button id="pvClose" class="sec">Cerrar</button>
   </div>
-  <div class="pvscroll"><div class="pvpage" id="pvPage"></div></div>
+  <div class="pvscroll">
+    <p class="pvedge">Hoja A4 · todo lo que está dentro del recuadro blanco se imprime</p>
+    <div class="pvpage" id="pvPage"></div>
+    <p class="pvedge">Fin de la hoja</p>
+  </div>
 </div>
 
 <p class="foot" id="foot"></p>
@@ -884,146 +1006,463 @@ pinch:{d:[
  ['L',[[84,62],[82,84],[80,102]]],['L',[[122,62],[124,84],[126,102]]],['H',103,48,11],
  ['R',74,106,12,24],['R',120,106,12,24],
  ['A','M148 112 L148 132']
-]}
+]},
+legpress:{d:[
+ ['E',[[26,128],[26,86],[62,74]]],['E',[[26,110],[58,104]]],
+ ['R',96,44,10,56],['E',[[101,100],[101,116]]],['E',[[86,116],[116,116]]],
+ ['L',[[46,96],[74,92]]],['H',34,90,10],
+ ['L',[[48,100],[70,116],[92,110]]],
+ ['L',[[48,104],[72,124],[94,120]]],
+ ['A','M124 74 L152 60']
+]},
 
+legext:{d:[
+ ['E',[[44,104],[100,104]]],['E',[[46,104],[46,140]]],['E',[[98,104],[98,140]]],
+ ['E',[[44,104],[38,66]]],
+ ['L',[[52,98],[52,74]]],['H',52,64,10],
+ ['L',[[56,100],[96,100]]],['L',[[96,100],[134,84]]],
+ ['E',[[136,84],[136,100]]],['C',136,92,8],
+ ['A','M120 122 Q 142 116 146 98']
+]},
+
+seatedcurl:{d:[
+ ['E',[[40,100],[104,100]]],['E',[[42,100],[42,140]]],['E',[[100,100],[100,140]]],
+ ['E',[[40,100],[34,64]]],
+ ['L',[[50,94],[50,72]]],['H',50,62,10],
+ ['L',[[54,96],[96,96]]],['L',[[96,96],[122,118]]],
+ ['E',[[124,120],[124,134]]],['C',124,127,8],
+ ['A','M144 84 Q 152 108 138 124']
+]},
+
+chestpress:{d:[
+ ['E',[[54,58],[54,140]]],['E',[[54,96],[92,96]]],
+ ['L',[[62,86],[62,64]]],['H',62,54,10],
+ ['L',[[66,90],[96,84],[124,80]]],
+ ['L',[[66,96],[96,92],[124,88]]],
+ ['E',[[126,72],[126,96]]],['C',126,72,8],['C',126,96,8],
+ ['L',[[62,102],[68,124],[68,140]]],['L',[[58,140],[82,140]]],
+ ['A','M104 58 L132 58']
+]},
+
+latpull:{d:[
+ ['E',[[100,16],[100,44]]],['E',[[70,44],[130,44]]],['E',[[70,44],[70,36]]],['E',[[130,44],[130,36]]],
+ ['E',[[54,120],[122,120]]],['E',[[58,120],[58,140]]],['E',[[118,120],[118,140]]],
+ ['L',[[88,112],[88,74]]],['H',88,64,11],
+ ['L',[[88,76],[74,54],[70,46]]],['L',[[88,76],[104,54],[128,46]]],
+ ['L',[[88,112],[116,124]]],
+ ['A','M148 52 L148 84']
+]},
+
+seatedrow:{d:[
+ ['E',[[172,40],[172,140]]],['O',168,84,5],['E',[[168,84],[112,88]]],
+ ['E',[[40,116],[96,116]]],['E',[[44,116],[44,140]]],
+ ['L',[[70,110],[70,72]]],['H',70,62,11],
+ ['L',[[70,80],[94,86],[112,88]]],
+ ['L',[[70,110],[104,116],[126,128]]],
+ ['A','M136 62 L104 68']
+]},
+
+torsorot:{d:[
+ ['E',[[60,116],[128,116]]],['E',[[64,116],[64,140]]],['E',[[124,116],[124,140]]],
+ ['E',[[94,116],[94,92]]],
+ ['L',[[94,108],[92,68]]],['H',90,54,11],
+ ['E',[[64,88],[124,84]]],
+ ['L',[[80,74],[76,88]]],['L',[[104,72],[110,86]]],
+ ['L',[[92,72],[80,74]]],['L',[[92,72],[104,72]]],
+ ['A','M56 66 Q 90 44 126 60']
+]},
+
+cablerot:{d:[
+ ['E',[[178,28],[178,140]]],['O',174,72,5],['E',[[174,72],[118,80]]],
+ ['L',[[66,140],[72,114],[90,98]]],['L',[[112,140],[110,114],[96,98]]],
+ ['L',[[93,98],[98,64]]],['L',[[98,66],[120,72],[118,80]]],['H',96,52,11],
+ ['A','M58 108 Q 90 126 120 106']
+]},
+
+smithsquat:{d:[
+ ['E',[[36,20],[36,140]]],['E',[[164,20],[164,140]]],
+ ['E',[[44,60],[156,60]]],['C',52,60,11],['C',148,60,11],
+ ['L',[[98,64],[84,102]]],['L',[[84,102],[118,108],[104,140]]],['L',[[94,140],[120,140]]],
+ ['L',[[98,66],[80,76],[74,62]]],['H',96,50,11],
+ ['A','M18 112 L18 76']
+]},
+
+abduct:{d:[
+ ['E',[[62,102],[126,102]]],['E',[[66,102],[66,140]]],['E',[[120,102],[120,140]]],
+ ['L',[[94,96],[94,66]]],['H',94,56,11],
+ ['L',[[88,98],[62,110],[46,104]]],
+ ['L',[[100,98],[126,110],[142,104]]],
+ ['E',[[44,98],[44,116]]],['E',[[144,98],[144,116]]],
+ ['A','M26 108 L12 108'],['A','M162 108 L176 108']
+]},
+
+wristcurl:{d:[
+ ['E',[[40,110],[110,110]]],['E',[[44,110],[44,140]]],
+ ['L',[[62,104],[62,76]]],['H',62,66,10],
+ ['L',[[64,84],[96,100],[128,100]]],
+ ['L',[[128,100],[140,88]]],
+ ['E',[[132,84],[152,84]]],['C',132,84,8],['C',152,84,8],
+ ['A','M146 116 Q 158 104 148 92']
+]},
+
+seatedcalf:{d:[
+ ['E',[[46,106],[104,106]]],['E',[[50,106],[50,140]]],
+ ['R',82,86,44,10],
+ ['L',[[70,100],[70,74]]],['H',70,64,10],
+ ['L',[[74,102],[100,102],[100,124]]],
+ ['L',[[100,124],[118,132]]],['E',[[108,138],[150,138]]],
+ ['A','M136 106 L136 82']
+]},
+
+gripper:{d:[
+ ['L',[[16,120],[70,104]]],
+ ['L',[[70,104],[104,96]]],
+ ['L',[[104,96],[130,80]]],
+ ['L',[[104,100],[128,104]]],
+ ['E',[[126,68],[150,96]]],['E',[[124,110],[152,96]]],
+ ['C',151,96,7],
+ ['E',[[134,80],[140,104]]],
+ ['A','M150 62 Q 168 84 150 112']
+]},
+
+cablefly:{d:[
+ ['E',[[26,24],[26,140]]],['E',[[178,24],[178,140]]],
+ ['O',30,60,5],['O',174,60,5],
+ ['L',[[86,140],[90,114],[98,94]]],['L',[[118,140],[114,114],[106,94]]],
+ ['L',[[102,94],[102,64]]],
+ ['L',[[102,68],[74,72],[32,62]]],['L',[[102,68],[130,72],[172,62]]],['H',102,50,11],
+ ['A','M60 96 Q 102 112 144 96']
+]},
+
+broadjump:{d:[
+ ['L',[[128,140],[132,112],[120,94]]],
+ ['L',[[120,94],[100,104],[84,118]]],
+ ['L',[[120,94],[122,60]]],
+ ['L',[[122,62],[144,56],[158,44]]],['L',[[122,62],[100,56],[86,44]]],['H',122,48,11],
+ ['A','M28 128 Q 74 78 116 108'],
+ ['D','M22 146 L60 146'],['D','M116 146 L154 146']
+]},
+
+vertjump:{d:[
+ ['L',[[92,140],[96,112],[102,92]]],['L',[[118,140],[114,112],[108,92]]],
+ ['L',[[105,92],[105,58]]],
+ ['L',[[105,60],[92,38],[88,20]]],['L',[[105,60],[120,38],[124,20]]],['H',105,46,11],
+ ['A','M148 110 L148 56'],
+ ['D','M60 24 L92 24']
+]},
+
+singlelegpress:{d:[
+ ['E',[[26,128],[26,86],[62,74]]],['E',[[26,110],[58,104]]],
+ ['R',96,44,10,56],['E',[[101,100],[101,116]]],['E',[[86,116],[116,116]]],
+ ['L',[[46,96],[74,92]]],['H',34,90,10],
+ ['L',[[48,100],[72,118],[94,112]]],
+ ['L',[[48,106],[64,124]]],
+ ['A','M124 74 L152 60']
+]},
+
+shrug:{d:[
+ ['L',[[88,140],[92,116],[98,96]]],['L',[[118,140],[114,116],[108,96]]],
+ ['L',[[103,96],[103,60]]],['L',[[82,58],[124,58]]],
+ ['L',[[82,58],[80,84],[80,104]]],['L',[[124,58],[126,84],[126,104]]],['H',103,44,11],
+ ['E',[[80,108],[80,128]]],['C',80,108,7],['C',80,128,7],
+ ['E',[[126,108],[126,128]]],['C',126,108,7],['C',126,128,7],
+ ['A','M150 84 L150 58']
+]},
+
+hack:{d:[
+ ['E',[[24,132],[86,72]]],['E',[[24,132],[52,132]]],
+ ['E',[[62,96],[100,62]]],
+ ['L',[[70,110],[96,86]]],['H',62,118,10],
+ ['L',[[74,112],[108,106],[124,124]]],
+ ['L',[[80,118],[112,114],[128,132]]],
+ ['E',[[120,124],[146,140]]],
+ ['A','M132 78 L158 60']
+]},
+
+radialdev:{d:[
+ ['L',[[30,124],[86,112]]],
+ ['L',[[86,112],[118,106]]],
+ ['E',[[126,30],[122,104]]],
+ ['C',124,34,10],
+ ['L',[[118,106],[130,110]]],
+ ['A','M150 96 Q 164 62 148 34']
+]},
+
+revwrist:{d:[
+ ['E',[[36,112],[112,112]]],['E',[[40,112],[40,140]]],
+ ['L',[[58,106],[58,78]]],['H',58,68,10],
+ ['L',[[60,86],[94,102],[126,102]]],
+ ['L',[[126,102],[136,116]]],
+ ['E',[[128,120],[150,120]]],['C',128,120,8],['C',150,120,8],
+ ['A','M148 88 Q 160 102 150 114']
+]},
+
+deadhang:{d:[
+ ['E',[[32,26],[168,26]]],['E',[[42,26],[42,12]]],['E',[[158,26],[158,12]]],
+ ['L',[[84,28],[86,52]]],['L',[[116,28],[114,52]]],
+ ['H',100,62,11],
+ ['L',[[100,72],[100,116]]],
+ ['L',[[100,116],[92,140]]],['L',[[100,116],[110,140]]],
+ ['A','M150 68 L150 110']
+]},
+
+glutekick:{d:[
+ ['E',[[24,30],[24,140]]],['O',28,116,5],
+ ['L',[[86,140],[86,110],[92,88]]],
+ ['L',[[92,88],[92,58]]],['L',[[92,60],[112,66],[124,60]]],['H',92,46,11],
+ ['L',[[90,96],[60,112],[30,116]]],
+ ['A','M56 138 Q 90 132 108 116']
+]},
+
+hipabd:{d:[
+ ['E',[[64,104],[128,104]]],['E',[[68,104],[68,140]]],['E',[[124,104],[124,140]]],
+ ['L',[[96,98],[96,66]]],['H',96,56,11],
+ ['L',[[90,100],[64,114],[48,110]]],
+ ['L',[[102,100],[128,114],[144,110]]],
+ ['E',[[46,100],[46,122]]],['E',[[146,100],[146,122]]],
+ ['A','M28 112 L14 112'],['A','M164 112 L178 112']
+]},
+
+bicepcurl:{d:[
+ ['E',[[176,26],[176,140]]],['O',172,116,5],['E',[[172,116],[128,110]]],
+ ['L',[[88,140],[92,116],[99,96]]],['L',[[118,140],[114,116],[107,96]]],
+ ['L',[[103,96],[103,60]]],['L',[[86,62],[120,62]]],
+ ['L',[[86,62],[84,86],[104,96]]],['L',[[120,62],[124,86],[126,108]]],['H',103,48,11],
+ ['A','M144 92 Q 152 74 138 62']
+]},
+
+tricepext:{d:[
+ ['E',[[176,20],[176,140]]],['O',172,44,5],['E',[[172,44],[126,58]]],
+ ['L',[[86,140],[90,116],[98,96]]],['L',[[116,140],[112,116],[106,96]]],
+ ['L',[[102,96],[102,60]]],['L',[[86,62],[118,62]]],
+ ['L',[[118,62],[126,58]]],
+ ['L',[[118,62],[124,84],[126,102]]],['H',102,48,11],
+ ['A','M144 62 L144 100']
+]},
+
+hammercurl:{d:[
+ ['L',[[88,140],[92,116],[99,96]]],['L',[[118,140],[114,116],[107,96]]],
+ ['L',[[103,96],[103,60]]],['L',[[86,62],[120,62]]],
+ ['L',[[86,62],[80,86],[92,98]]],['L',[[120,62],[126,86],[114,98]]],['H',103,48,11],
+ ['E',[[86,100],[86,120]]],['C',86,100,7],['C',86,120,7],
+ ['E',[[120,100],[120,120]]],['C',120,100,7],['C',120,120,7],
+ ['A','M148 118 Q 158 92 146 72']
+]},
+
+legcurlmach:{d:[
+ ['R',36,96,110,9],['E',[[42,105],[42,140]]],['E',[[140,105],[140,140]]],
+ ['L',[[56,92],[122,92]]],['L',[[122,92],[148,92],[156,66]]],
+ ['L',[[56,94],[68,106],[84,104]]],['H',44,88,10],
+ ['O',158,60,9],
+ ['A','M170 98 Q 184 80 170 64']
+]},
+
+machineshrug:{d:[
+ ['E',[[34,20],[34,140]]],['E',[[166,20],[166,140]]],
+ ['E',[[42,96],[158,96]]],['C',50,96,10],['C',150,96,10],
+ ['L',[[100,90],[100,58]]],['H',100,46,11],
+ ['L',[[82,60],[80,90]]],['L',[[118,60],[120,90]]],['L',[[82,60],[118,60]]],
+ ['L',[[100,90],[92,140]]],['L',[[100,90],[110,140]]],
+ ['A','M144 76 L144 52']
+]},
+
+cablehammer:{d:[
+ ['E',[[176,26],[176,140]]],['O',172,118,5],['E',[[172,118],[126,106]]],
+ ['L',[[88,140],[92,116],[99,96]]],['L',[[118,140],[114,116],[107,96]]],
+ ['L',[[103,96],[103,60]]],['L',[[86,62],[120,62]]],
+ ['L',[[86,62],[82,88],[96,98]]],['L',[[120,62],[126,86],[126,106]]],['H',103,48,11],
+ ['A','M146 96 Q 154 76 140 62']
+]},
+
+smithbulgarian:{d:[
+ ['E',[[30,16],[30,140]]],['E',[[170,16],[170,140]]],
+ ['E',[[38,58],[162,58]]],['C',46,58,10],['C',154,58,10],
+ ['R',134,100,44,8],['E',[[140,108],[140,140]]],
+ ['L',[[98,62],[92,100]]],['L',[[92,100],[86,120],[92,140]]],['L',[[82,140],[104,140]]],
+ ['L',[[94,100],[120,116],[140,98]]],
+ ['L',[[98,62],[80,66],[74,56]]],['H',98,50,11],
+ ['A','M56 92 L56 118']
+]},
+
+highfeetpress:{d:[
+ ['E',[[26,128],[26,86],[62,74]]],['E',[[26,110],[58,104]]],
+ ['R',96,36,10,60],['E',[[101,96],[101,116]]],['E',[[86,116],[116,116]]],
+ ['L',[[46,96],[74,92]]],['H',34,90,10],
+ ['L',[[48,98],[74,110],[94,86]]],
+ ['L',[[48,104],[76,118],[96,94]]],
+ ['A','M124 66 L152 52']
+]}
 };
 
 </script>
 
 <script>
-/* ===================== PROGRAMA ===================== */
+/* 4 bloques definidos por los días que faltan para el torneo.
+   b[0]=Base explosiva  b[1]=Fuerza máxima  b[2]=Potencia  b[3]=Afinado */
 const PLAN=[
-/* 0 LUNES */
-{t:'Pierna y potencia rotacional',k:'gym',s:'Pierna',
- w:'Bicicleta o cuerda 3 min · cadera 90/90 con giros, 8 por lado · sentadilla en copa profunda 3×20 s · puente de glúteo 2×12 · rotación torácica en cuadrupedia, 8 por lado · caminata lateral con banda 2×10 m.',
+
+/* ================= 0 · LUNES ================= */
+{t:'Pierna y cadera · fuerza máxima',k:'gym',s:'Pierna A',
+ w:'Bicicleta 5 min · cadera 90/90 con giros, 8 por lado · sentadilla con peso corporal 2×15 · puente de glúteo 2×15 · caminata lateral con banda 2×12 m · 10 swings suaves en seco.',
  b:[
- {h:'Bloque A · Potencia rotacional',s:'Con el cuerpo fresco, antes de cansarte. Descansa 60 segundos entre series.',e:[
-  {a:'mbrot',n:'Lanzamiento rotacional a la pared',c:'De lado a la pared, a dos metros. Empuja con el pie trasero, gira la cadera y suelta. Recibe el rebote y repite sin pausa.',r:['3×6 por lado · balón 3 kg','4×5 por lado · balón 4-5 kg','5×4 por lado · máxima velocidad']},
-  {a:'mbscoop',n:'Lanzamiento hacia arriba y atrás',c:'De espaldas a la pared, el balón entre las piernas. Extiende la cadera con fuerza y lánzalo por encima de la cabeza.',r:['3×5','4×5','4×3 explosivo']}
+ {h:'A · Despertar la cadera · 5 min',s:'Antes de las máquinas, con el sistema nervioso fresco.',e:[
+  {a:'mbrot',n:'Lanzamiento rotacional a la pared',c:'De lado a la pared, a dos metros. Empuja con el pie trasero, gira la cadera y suelta. Velocidad, no cansancio.',r:['4×5 por lado · 3 kg','4×5 por lado · 4 kg','4×4 por lado · a tope','3×4 por lado · suave']}
  ]},
- {h:'Bloque B · Fuerza principal',s:'De 2 a 3 minutos de descanso entre series. Aquí es donde se construye el motor.',e:[
-  {a:'squat',n:'Sentadilla trasera con barra',c:'Si la técnica todavía no es sólida, usa sentadilla goblet con mancuerna las primeras tres semanas. Baja hasta que el muslo pase la paralela.',r:['4×8','4×5','4×3 movidas rápido']},
-  {a:'hipthrust',n:'Empuje de cadera con barra',c:'Espalda alta apoyada en el banco y mentón metido. Aprieta el glúteo un segundo arriba. Este es tu sustituto del peso muerto.',r:['3×10','4×6','3×5 explosivo']}
+ {h:'B · Fuerza máxima de pierna',s:'El día de más kilos de la semana. Descansa 3 minutos entre series: si no descansas, no levantas. Anota cada peso en la hoja.',e:[
+  {a:'legpress',n:'Prensa de piernas',c:'Pies a la anchura de los hombros en el centro de la plataforma. Baja controlado y empuja rápido. Es donde más kilos vas a sumar en estas semanas.',r:['5×8 subiendo peso','5×5 pesado + 1 serie tope de 3','5×3 al 85 % movido rápido','2×5 suave']},
+  {a:'hack',n:'Sentadilla hack en máquina',c:'El respaldo sostiene tu espalda, así que puedes cargar sin miedo. Baja hasta que el muslo pase la paralela.',r:['4×8','5×5 pesado','4×3 rápido','2×6 ligero']},
+  {a:'smithsquat',n:'Sentadilla en multipower',c:'Tercer movimiento pesado. La barra guiada te deja empujar con todo sin gastar energía en equilibrarte.',r:['3×10','4×6','3×4 rápido','—']}
  ]},
- {h:'Bloque C · Accesorios',s:'De 60 a 90 segundos de descanso. Volumen tranquilo, sin buscar el fallo.',e:[
-  {a:'backext',n:'Extensión de espalda a 45°',c:'Sube hasta que el cuerpo quede en línea recta. No arquees de más al final.',r:['3×12','3×10 con disco','2×12']},
-  {a:'legcurl',n:'Curl femoral acostado o nórdico',c:'Protege el isquiotibial para cuando corras a máxima velocidad. Es prevención, no estética.',r:['3×10','3×8','3×6']},
-  {a:'calf',n:'Elevación de talón de pie',c:'Rango completo con una pausa de un segundo abajo. El tobillo es el primer eslabón del primer paso.',r:['3×15','3×12','3×12']},
-  {a:'copenhagen',n:'Plancha Copenhagen',c:'Aductor: clave para deslizarte de lado en defensa y para no lesionarte la ingle en una jugada forzada.',r:['3×20 s por lado','3×30 s por lado','3×30 s por lado']},
-  {a:'pallof',n:'Pallof press',c:'La polea te quiere girar y tú no la dejas. Costillas abajo, sin arquear la espalda.',r:['3×10 por lado','3×10 por lado','3×8 por lado']}
+ {h:'C · Cadera pesada',s:'Aquí es donde se genera el giro. Un glúteo fuerte es lo que separa un swing que empuja la pelota de uno que la manda lejos.',e:[
+  {a:'hipthrust',n:'Empuje de cadera con barra',c:'Espalda alta en el banco, mentón metido. Aprieta el glúteo un segundo arriba. Aguanta mucho más peso del que crees: no le tengas miedo a la carga.',r:['4×10','5×6 pesado','4×5 explosivo','2×8 ligero']},
+  {a:'backext',n:'Extensión de espalda a 45°',c:'Sube hasta que el cuerpo quede recto, apretando glúteo e isquiotibial. Añade un disco al pecho en cuanto puedas.',r:['3×12','4×10 con disco','3×8 con disco','2×10']},
+  {a:'glutekick',n:'Extensión de cadera en polea',c:'Polea baja al tobillo. Lleva la pierna atrás con el glúteo, sin arquear la espalda. Trabaja cada lado por separado, que es como se batea.',r:['3×12 por lado','4×10 por lado','3×8 por lado','2×10 por lado']},
+  {a:'hipabd',n:'Abductores y aductores en máquina',c:'Las dos direcciones. Aquí el aductor es el importante: es el que bloquea la pierna delantera cuando el swing frena, y ese bloqueo es lo que manda la energía al bate en vez de dejarla escapar.',r:['3×15 cada una','4×12 cada una pesado','3×12 cada una','2×12 cada una']}
+ ]},
+ {h:'D · Protección',s:'Corto y sin fallo. Es lo que te deja correr a tope el día del torneo sin romperte nada.',e:[
+  {a:'seatedcurl',n:'Curl femoral sentado',c:'El isquiotibial es el músculo que se rompe en los sprints. No lo saltes nunca.',r:['3×12','4×10','3×8','2×10']},
+  {a:'seatedcalf',n:'Elevación de talón en máquina',c:'Rango completo con pausa abajo. El tobillo es el primer eslabón que empuja el suelo.',r:['3×15','4×12','3×12','2×12']}
+ ]},
+ {h:'E · Antebrazo · dosis diaria',s:'Antebrazo todos los días de gimnasio. Son 5 minutos y es lo que sostiene el bate en el contacto.',e:[
+  {a:'wristcurl',n:'Curl de muñeca con barra',c:'Sentado, antebrazos sobre el muslo y muñecas por fuera de la rodilla. Deja rodar la barra hasta los dedos y vuelve a cerrarla.',r:['3×15','4×12 pesado','3×10','2×12 ligero']},
+  {a:'gripper',n:'Pronación y supinación con mancuerna',c:'Agarra la mancuerna por un extremo y gira la muñeca de lado a lado. Es lo que hacen tus manos al soltar el barril.',r:['3×12 por lado','3×12 por lado','3×10 por lado','2×12 por lado']}
  ]}]},
 
-/* 1 MARTES */
-{t:'Empuje y salud del hombro',k:'gym',s:'Empuje',
- w:'Aperturas con banda 2×15 · rotación externa a 90° 2×12 por lado · serie Y-T-W 2×8 de cada letra · flexión con protracción contra la pared 2×10 · círculos de muñeca y codo 30 s.',
+/* ================= 1 · MARTES ================= */
+{t:'Rotación y antebrazo · el contacto',k:'gym',s:'Rotación',
+ w:'Remo suave 4 min · rotación torácica en cuadrupedia 10 por lado · cadera 90/90 · círculos de muñeca y codo 40 s · 15 swings en seco subiendo de intensidad.',
  b:[
- {h:'Bloque A · Empuje',s:'De 2 a 3 minutos de descanso entre series. Hoy las piernas descansan de lo de ayer.',e:[
-  {a:'dbbench',n:'Press de banca con mancuernas',c:'Con mancuernas y no con barra: el hombro se mueve libre y el rango es más natural para alguien que lanza.',r:['4×8','4×5','4×3']},
-  {a:'landminepress',n:'Press landmine de pie, un brazo',c:'La barra apoyada en una esquina y empujas en diagonal. Es el empuje vertical más seguro para el hombro del pelotero.',r:['3×8 por lado','4×6 por lado','3×5 por lado']},
-  {a:'pushup',n:'Flexiones con lastre o fondos asistidos',c:'Arriba del todo, empuja el suelo y separa las escápulas: ahí trabaja el serrato, que estabiliza el hombro al tirar.',r:['3×12','3×8 con lastre','3×8']}
+ {h:'A · Lanzamientos · el día grande',s:'Lo que más directamente se convierte en pelotas duras. Máxima intención y 90 segundos entre series: si te cansas, dejaste de entrenar potencia.',e:[
+  {a:'mbrot',n:'Lanzamiento rotacional a la pared',c:'Hoy busca distancia. Si el balón deja de llegar tan lejos, corta la serie: la velocidad ya se fue.',r:['5×6 por lado · 3 kg','5×5 por lado · 4 kg','5×4 por lado · máxima velocidad','3×4 por lado']},
+  {a:'mbscoop',n:'Lanzamiento hacia arriba y atrás',c:'De espaldas a la pared, balón entre las piernas. Extiende la cadera con todo y suéltalo por encima de la cabeza.',r:['4×6','4×5','4×4 explosivo','2×4']}
  ]},
- {h:'Bloque B · Hombro y escápula',s:'Este bloque no se salta nunca. Carga ligera y ejecución lenta: es lo que mantiene el brazo sano toda la temporada.',e:[
-  {a:'facepull',n:'Face pull en polea',c:'Codos altos, termina con los puños a la altura de las orejas. Compensa todo lo que empujas.',r:['3×15 · carga ligera','3×15 · carga ligera','3×15 · carga ligera']},
-  {a:'exrot',n:'Rotación externa con banda a 90°',c:'El codo a la altura del hombro. La vuelta lenta es donde está el beneficio real.',r:['3×15 por lado','3×15 por lado','3×15 por lado']}
+ {h:'B · Rotación con carga',s:'El swing descompuesto en piezas. El movimiento sale de la cadera y los brazos solo sostienen. Sube peso cada semana mientras el giro siga saliendo rápido.',e:[
+  {a:'cablerot',n:'Rotación en polea de pie',c:'Polea a la altura del pecho, tú de lado. Pivota el pie trasero igual que al batear y suelta rápido. Tu ejercicio estrella de poder.',r:['4×10 por lado','5×8 por lado pesado','5×5 por lado a tope','3×6 por lado']},
+  {a:'torsorot',n:'Máquina de rotación de torso sentado',c:'Cadera bloqueada, gira solo el torso y vuelve lento. Lo más específico que hay en máquina para tu swing.',r:['4×12 por lado','5×8 por lado pesado','4×6 por lado rápido','2×10 ligero']},
+  {a:'chop',n:'Chop y lift en polea',c:'De arriba abajo y después al revés. Completa el patrón en las dos diagonales.',r:['3×12 por lado','4×10 por lado','4×8 por lado rápido','2×10 por lado']}
  ]},
- {h:'Bloque C · Core y antebrazo',s:'',e:[
-  {a:'deadbug',n:'Bicho muerto',c:'La zona lumbar pegada al piso todo el tiempo. Si se despega, acorta el rango del brazo y la pierna.',r:['3×8 por lado','3×8 por lado','3×8 por lado']},
-  {a:'sideplank',n:'Plancha lateral con elevación de cadera',c:'Oblicuos: el músculo que frena la rotación en el swing y evita que la fuerza se escape de lado.',r:['3×12 por lado','3×12 por lado','3×12 por lado']},
-  {a:'wristroll',n:'Rodillo de muñeca',c:'Sube y baja el peso enrollando la cuerda. Esa quemazón en el antebrazo es control del bate.',r:['3 subidas y bajadas','3 subidas y bajadas','3 subidas y bajadas']}
+ {h:'C · Antebrazo pesado · el bloque del contacto',s:'Este es el bloque que te pedía el contacto duro. Cuando la recta llega a 90 y golpeas fuera del barril, lo que impide que el bate se te frene en las manos es esto. Ve pesado: 4 series de verdad, no de relleno.',e:[
+  {a:'wristcurl',n:'Curl de muñeca en polea baja',c:'Sentado frente a la polea, antebrazos sobre el muslo y muñecas por fuera de la rodilla. La polea mantiene tensión abajo, donde la barra la pierde. Deja rodar el agarre hasta los dedos y ciérralo.',r:['4×12','4×10 pesado','4×8 pesado','2×12 ligero']},
+  {a:'revwrist',n:'Curl de muñeca invertido',c:'Palmas hacia abajo. Trabaja la parte de arriba del antebrazo, que es la que la mayoría descuida y la que estabiliza el bate en el impacto.',r:['3×15','4×12','3×10','2×12']},
+  {a:'radialdev',n:'Elevación con bate o martillo · desviación radial',c:'Agarra un bate por el mango, brazo pegado al costado, y sube solo con la muñeca. Este es el movimiento exacto de tus manos en el swing: no hay nada más específico para el contacto.',r:['3×12 por lado','4×10 por lado','3×10 por lado','2×12 por lado']},
+  {a:'gripper',n:'Pronación y supinación con mancuerna',c:'Agarra la mancuerna por un extremo y gira la muñeca de un lado al otro. Es lo que hacen tus manos al soltar el barril.',r:['3×12 por lado','4×12 por lado','3×10 por lado','2×12 por lado']}
  ]}]},
 
-/* 2 MIERCOLES */
-{t:'Unilateral y primer paso',k:'gym',s:'Unilateral',
- w:'Trote suave 3 min · escalera de agilidad, 4 patrones × 2 pasadas · sentadilla con peso corporal 2×12 · caminata lateral con banda 2×10 m · saltitos de tobillo 2×20.',
+/* ================= 2 · MIERCOLES ================= */
+{t:'Tren superior · empuje, tracción y hombro',k:'gym',s:'Superior',
+ w:'Aperturas con banda 2×15 · rotación externa a 90° 2×12 por lado · flexión con protracción contra la pared 2×10 · 10 tiros progresivos si tienes pelota.',
  b:[
- {h:'Bloque A · Pliometría',s:'Fresco y con calidad. Si un aterrizaje se ve descontrolado, corta la serie ahí mismo.',e:[
-  {a:'latbound',n:'Salto lateral a una pierna con aterrizaje congelado',c:'Aterriza y quédate quieto dos segundos. Esto es exactamente el primer paso hacia un roletazo a tu izquierda.',r:['3×5 por lado','4×5 por lado','4×4 por lado']},
-  {a:'boxjump',n:'Salto al cajón',c:'Sube saltando y baja caminando. Nunca aterrices en el piso desde arriba: eso es carga sin beneficio.',r:['3×5','4×4','4×3 · añade salto en profundidad desde 30 cm']}
+ {h:'A · Tracción pesada',s:'Las piernas descansan hoy entre los dos días pesados. El dorsal es el freno del swing: cuanto mejor frena, más rápido acelera el bate.',e:[
+  {a:'latpull',n:'Jalón al pecho',c:'Pecho arriba, tira hacia la clavícula. Súbele peso hasta que las dos últimas repeticiones cuesten de verdad.',r:['4×10','5×6 pesado','4×5','2×10']},
+  {a:'seatedrow',n:'Remo sentado en polea',c:'Tronco firme, tira hacia el abdomen sin balancearte. Aprieta las escápulas al final.',r:['4×12','5×8 pesado','4×6','2×10']}
  ]},
- {h:'Bloque B · Fuerza unilateral',s:'Una pierna a la vez, que es como se juega la pelota. Han pasado 48 horas desde el lunes: si todavía sientes las piernas muy cargadas, baja una serie de cada ejercicio.',e:[
-  {a:'bulgarian',n:'Sentadilla búlgara',c:'El pie de atrás elevado en el banco. Torso ligeramente adelante para cargar el glúteo y no la rodilla.',r:['3×10 por lado','4×6 por lado','3×5 por lado']},
-  {a:'latlunge',n:'Zancada lateral con mancuerna',c:'Cadera hacia atrás y rodilla alineada con el pie. Trabaja el rango lateral que usas en el cuadro.',r:['3×10 por lado','3×8 por lado','3×8 por lado']},
-  {a:'stepup',n:'Subida al cajón a la altura de la rodilla',c:'Sube empujando con el talón del pie de arriba, sin darte impulso con el de abajo.',r:['3×8 por lado','3×8 por lado','3×6 por lado']},
-  {a:'sled',n:'Empuje de trineo o marcha con carga',c:'Si no hay trineo, marcha con mancuernas pesadas dando pasos cortos y rápidos.',r:['4×20 m','5×20 m','6×15 m rápido']}
+ {h:'B · Empuje',s:'',e:[
+  {a:'chestpress',n:'Press de pecho en máquina',c:'Asiento a la altura del pecho, codos algo por debajo de los hombros. Empuja rápido, vuelve lento.',r:['4×10','5×6 pesado','4×4 explosivo','2×8 ligero']},
+  {a:'machineshrug',n:'Encogimiento en multipower',c:'La barra guiada te deja cargar mucho más que con mancuernas porque no tienes que estabilizar nada. Sube los hombros hacia las orejas y aguanta un segundo arriba.',r:['3×12','4×8 pesado','3×8','2×10']}
  ]},
- {h:'Bloque C · Core',s:'',e:[
-  {a:'abwheel',n:'Rueda abdominal desde rodillas',c:'Si todavía no la controlas, cámbiala por plancha con toque de hombro, 3×20.',r:['3×8','3×8','3×8']},
-  {a:'hollow',n:'Hollow hold',c:'La zona lumbar pegada al piso, sin arquear. Solo la baja espalda toca el suelo.',r:['3×30 s','3×30 s','3×30 s']}
+ {h:'C · Brazo directo en polea',s:'Bíceps y tríceps con carga real. El bíceps sostiene el bate en el arranque del swing y el tríceps extiende los brazos en la extensión después del contacto: los dos suman a que la pelota salga dura.',e:[
+  {a:'bicepcurl',n:'Curl de bíceps en polea baja',c:'Codos pegados al costado, sin balancear el cuerpo. La polea mantiene tensión en todo el recorrido, cosa que la mancuerna no hace.',r:['3×12','4×8 pesado','3×8','2×10 ligero']},
+  {a:'cablehammer',n:'Curl martillo en polea con cuerda',c:'Con cuerda en polea baja, palmas enfrentadas como agarrando un bate. La polea mantiene tensión en todo el recorrido y trabaja bíceps y braquiorradial a la vez: es el curl que más transfiere al agarre.',r:['3×12','4×10 pesado','3×8','2×10']},
+  {a:'tricepext',n:'Extensión de tríceps en polea alta',c:'Codos fijos al costado, extiende solo el antebrazo. Aprieta abajo un segundo.',r:['3×12','4×10 pesado','3×8','2×10']}
+ ]},
+ {h:'D · Antebrazo · dosis diaria',s:'',e:[
+  {a:'radialdev',n:'Elevación con bate o martillo · desviación radial',c:'Agarra un bate por el mango, brazo pegado al costado, y sube solo con la muñeca. Es el movimiento exacto de tus manos en el swing: lo más específico que hay para el contacto.',r:['3×12 por lado','4×10 por lado','3×10 por lado','2×12 por lado']},
+  {a:'revwrist',n:'Curl de muñeca invertido',c:'Palmas hacia abajo. Trabaja la parte de arriba del antebrazo, la que estabiliza el bate en el impacto.',r:['3×15','4×12','3×10','2×12']}
+ ]},
+ {h:'E · Hombro y escápula',s:'Esto no se salta ni la semana del torneo. Carga ligera y ejecución lenta: es lo que te deja tirar sin dolor los días de competencia.',e:[
+  {a:'facepull',n:'Face pull en polea',c:'Codos altos, termina con los puños a la altura de las orejas.',r:['3×15 ligero','3×15 ligero','3×15 ligero','2×15 ligero']},
+  {a:'exrot',n:'Rotación externa en polea o banda',c:'Codo a la altura del hombro. La vuelta lenta es donde está el beneficio.',r:['3×15 por lado','3×15 por lado','3×12 por lado','2×15 por lado']}
+ ]},
+ {h:'F · Core que transmite',s:'El core no gira: aguanta. Si se dobla o se escapa de lado, la fuerza de la cadera no llega al bate.',e:[
+  {a:'pallof',n:'Pallof press en polea',c:'La polea te quiere girar y tú no la dejas. Costillas abajo, sin arquear.',r:['3×12 por lado','3×10 por lado','3×8 por lado','2×10 por lado']},
+  {a:'sideplank',n:'Plancha lateral con elevación de cadera',c:'Oblicuos: el músculo que frena la rotación justo en el contacto.',r:['3×12 por lado','3×12 por lado','3×10 por lado','2×12 por lado']}
  ]}]},
 
-/* 3 JUEVES */
-{t:'Tracción, agarre y core rotacional',k:'gym',s:'Tracción',
- w:'Remo suave o cuerda 3 min · aperturas con banda 2×15 · colgarse de la barra 2×20 s · dislocaciones de hombro con palo 2×10 · activación de dorsal en polea 2×12.',
+/* ================= 3 · JUEVES ================= */
+{t:'Pierna explosiva, cadera y agarre',k:'gym',s:'Pierna B',
+ w:'Trote suave 4 min · escalera de agilidad 2 pasadas · zancadas caminando 2×10 · caminata lateral con banda · 10 swings en seco.',
  b:[
- {h:'Bloque A · Tracción',s:'Tira al menos tanto como empujas. Es lo que equilibra el hombro. Hoy las piernas descansan para llegar frescas al viernes.',e:[
-  {a:'pullup',n:'Dominadas o jalón al pecho',c:'Si no salen limpias, usa banda o el jalón. Baja controlado en tres segundos.',r:['4× las que salgan · objetivo 8','4×6 con lastre','3×5 con lastre']},
-  {a:'row',n:'Remo con barra o mancuerna a un brazo',c:'Tronco firme y sin balancearte. Tira hacia la cadera, no hacia el pecho.',r:['4×10','4×6','3×6']},
-  {a:'invrow',n:'Remo invertido en barra baja',c:'Cuerpo en línea recta del talón a la cabeza. Aprieta las escápulas arriba.',r:['3×12','3×10','3×10']}
+ {h:'A · Series de contraste',s:'El método más potente que hay para ganar velocidad de bate en pocas semanas. Una serie pesada despierta el músculo y el movimiento rápido justo después aprovecha ese estado: 15 segundos entre el peso y el salto, 2 minutos antes de repetir.',e:[
+  {a:'legpress',n:'Prensa pesada + salto de longitud',c:'5 repeticiones pesadas, 15 segundos de pausa y 3 saltos de longitud lo más explosivos que puedas. Marca la distancia en el piso con cinta y persíguela cada semana.',r:['4 rondas','5 rondas','5 rondas','2 rondas suaves']},
+  {a:'cablerot',n:'Rotación pesada + lanzamiento',c:'6 rotaciones con carga fuerte, 15 segundos de pausa y 4 lanzamientos rotacionales a máxima velocidad. Aquí es donde se fabrica la velocidad de bate.',r:['4 rondas por lado','5 rondas por lado','5 rondas por lado','2 rondas por lado']}
  ]},
- {h:'Bloque B · Core rotacional',s:'El patrón del swing, pero con carga y bajo control.',e:[
-  {a:'chop',n:'Chop y lift en polea',c:'De arriba abajo y después al revés. El movimiento sale de la cadera; los brazos solo sostienen.',r:['3×12 por lado','3×10 por lado','4×8 por lado rápido']},
-  {a:'landminerot',n:'Rotación landmine',c:'Pivota el pie trasero en cada repetición, exactamente igual que en el swing.',r:['3×8 por lado','3×8 por lado','3×6 por lado']}
+ {h:'B · Una pierna a la vez',s:'Así es como se batea y como se corre: apoyado en un solo pie. Aquí salen los desequilibrios que te frenan.',e:[
+  {a:'singlelegpress',n:'Prensa a una pierna',c:'Un solo pie en el centro de la plataforma. Corrige la diferencia entre piernas y carga mucho más que cualquier ejercicio de peso corporal.',r:['3×10 por lado','4×6 por lado pesado','3×5 por lado explosivo','2×8 por lado']},
+  {a:'smithbulgarian',n:'Sentadilla búlgara en multipower',c:'Pie de atrás en un banco y la barra guiada sobre los hombros. Al no tener que equilibrarte puedes cargar bastante más que con mancuernas y el glúteo trabaja más.',r:['3×10 por lado','4×8 por lado','3×6 por lado','2×8 por lado']}
  ]},
- {h:'Bloque C · Agarre y antebrazo',s:'Lo último que toca la pelota es tu mano. Aquí se decide si el barril aguanta el contacto.',e:[
-  {a:'farmer',n:'Caminata del granjero',c:'Lo más pesado que puedas sostener sin encogerte de hombros. Pasos cortos y tronco alto.',r:['4×30 m','4×30 m','4×30 m']},
-  {a:'pinch',n:'Pinza de discos',c:'Dos discos lisos juntos, sostenidos solo con los dedos. Termina con flexión y extensión de muñeca, 3×15 en cada dirección.',r:['3×25 s por mano','3×25 s por mano','3×25 s por mano']}
+ {h:'C · Cadera lateral',s:'La cadera no solo se extiende: también frena de lado. El aductor es el que aguanta la pierna delantera cuando el swing se detiene, y ahí es donde la fuerza pasa al bate.',e:[
+  {a:'hipabd',n:'Abductores y aductores en máquina',c:'Las dos direcciones, pesado. El aductor sobre todo: es el que sostiene el bloqueo de la pierna delantera.',r:['3×15 cada una','4×12 cada una pesado','3×12 cada una','2×12 cada una']},
+  {a:'highfeetpress',n:'Prensa con pies altos y anchos',c:'Misma prensa, pies arriba y separados en la plataforma. Ese cambio de posición pasa casi todo el trabajo al glúteo y al aductor, que son los que giran y frenan la cadera en el swing.',r:['3×12','4×10 pesado','3×8','2×10']}
+ ]},
+ {h:'D · Agarre pesado',s:'Segunda dosis de antebrazo de la semana, esta vez de fuerza de agarre pura. Un agarre que no falla es lo que te deja acelerar el bate hasta el final.',e:[
+  {a:'farmer',n:'Caminata del granjero',c:'Lo más pesado que puedas sostener sin encogerte de hombros. Pasos cortos y tronco alto.',r:['4×30 m','5×30 m pesado','3×25 m','2×20 m']},
+  {a:'deadhang',n:'Colgarse de la barra',c:'Cuelga con las dos manos hasta que el agarre ceda. Añade peso con cinturón cuando pases del minuto. Es la forma más simple de subir fuerza de agarre.',r:['3× al fallo','4× al fallo con lastre','3×30 s','2×20 s']},
+  {a:'wristroll',n:'Rodillo de muñeca',c:'Sube y baja el peso enrollando la cuerda. Esa quemazón es control del bate.',r:['3 subidas y bajadas','4 subidas y bajadas','3 subidas y bajadas','2 subidas y bajadas']},
+  {a:'pinch',n:'Pinza de discos',c:'Dos discos lisos juntos, sostenidos solo con los dedos.',r:['3×25 s por mano','4×30 s por mano','3×20 s por mano','2×20 s por mano']}
  ]}]},
 
-/* 4 VIERNES */
-{t:'Campo: velocidad, guante y bate',k:'field',s:'Campo',
- w:'Trote 5 min · movilidad dinámica de cadera y tobillo · escalera de agilidad · 10 tiros progresivos, de corta a larga distancia.',
+/* ================= 4 · VIERNES ================= */
+{t:'Campo · el swing y la velocidad',k:'field',s:'Campo',
+ w:'Trote 5 min · movilidad dinámica de cadera y tobillo · 10 tiros progresivos · 20 swings en seco subiendo de intensidad.',
  b:[
- {h:'Bloque 1 · Velocidad · 25 min',s:'Termina con sprints lanzados al 95 %: 4×30 m en Fase 1, 4×40 m en Fase 2 y 5×40 m en Fase 3, con 2 minutos de descanso entre cada uno.',e:[
-  {a:'sprint',n:'Salida de home a primera',c:'Desde la posición de bateo. Cronometra cada tercera salida y anota el mejor tiempo de la semana.',r:['4×20 m','6×20 m','6×27 m completos']},
-  {a:'shuffle',n:'Arrancada de robo con paso cruzado',c:'Desde la posición de líder. El primer movimiento es el pie de atrás cruzando, nunca un saltito hacia arriba.',r:['4×10 m','6×10 m','8×10 m']}
- ]},
- {h:'Bloque 2 · Guante · 35 min',s:'',e:[
-  {a:'fielding',n:'Rodados frontales, de revés y a los costados',c:'El guante por debajo del nivel de la pelota, la palma abierta y los pies siempre en movimiento.',r:['3×10 de cada tipo','3×10 de cada tipo','3×10 de cada tipo']}
- ]},
- {h:'El resto del bloque de guante',s:'',l:[
-  'Prueba 5-10-5: 4 repeticiones. Cronométrala en la semana 1, la 6 y la 12',
-  'Paso de aproximación sincronizado con la soltada del lanzador: 3×10',
-  'Transferencia guante-mano contra la pared: 4×30 s, contando las limpias',
-  'Drop step y carrera hacia atrás para elevados: 3×8 por lado',
-  'Deslizamiento lateral y paso cruzado: 3×10 m'
- ]},
- {h:'Bloque 3 · Bateo · 35 min',s:'',e:[
-  {a:'tee',n:'Tee por zonas',c:'Diez a la recta interior, diez al centro y diez a la exterior. Cada zona tiene su propio punto de contacto.',r:['3×10','3×10','3×10']}
+ {h:'1 · Bateo, lo primero',s:'Hoy el bate manda y vas con las piernas recuperadas. Aquí compruebas si todo lo del gimnasio está llegando a la pelota.',e:[
+  {a:'mbrot',n:'Lanzamiento rotacional antes de batear',c:'Tres series de cuatro por lado justo antes de entrar a la jaula. Despiertan la cadera y vas a notar el bate más ligero.',r:['3×4 por lado','3×4 por lado','3×4 por lado','2×4 por lado']},
+  {a:'tee',n:'Tee por zonas',c:'Diez a la recta interior, diez al centro, diez a la exterior. Cada zona tiene su punto de contacto: la interior se batea más adelante.',r:['3×10','3×10','3×10','2×10']}
  ]},
  {h:'El resto del bloque de bateo',s:'',l:[
   'Soft toss frontal: 3×10, buscando que la cadera se abra antes que las manos',
-  'Práctica de bateo en vivo: 20 swings en Fase 1, 30 en Fase 2 y 3',
-  'Cuenta cuántos batazos salen de línea o con buen ángulo, no cuántos pegas',
-  'Solo en Fase 3: bate sobrecargado y aligerado, 5 con el pesado, 5 con el ligero y 5 con el normal. Nunca antes de un juego',
-  'Si tienes juego el sábado: corta los sprints a la mitad y quédate en tee y soft toss. Llegar con las piernas frescas vale más que la sesión completa'
+  'Práctica de bateo en vivo: 30 swings',
+  'Cuenta los batazos duros, no los que pegas: 10 pelotas bien golpeadas valen más que 40 flojas',
+  'Si tienes radar, mide la velocidad de salida en 5 swings y anótala en la hoja',
+  'Nada de bate lastrado cerca de la competencia: solo en el bloque 3 y lejos de un juego'
+ ]},
+ {h:'2 · Velocidad',s:'Al 95 % y con 2 minutos de descanso entre repeticiones. Esto es velocidad, no condición física.',e:[
+  {a:'sprint',n:'Salida de home a primera',c:'Desde la posición de bateo. Cronometra cada tercera salida.',r:['5×20 m','6×20 m','5×27 m','3×20 m']},
+  {a:'shuffle',n:'Arrancada de robo con paso cruzado',c:'El primer movimiento es el pie de atrás cruzando, nunca un saltito hacia arriba.',r:['5×10 m','6×10 m','5×10 m','3×10 m']}
+ ]},
+ {h:'3 · Guante, sin excederse',s:'',e:[
+  {a:'fielding',n:'Rodados frontales, de revés y a los costados',c:'Guante por debajo del nivel de la pelota, pies siempre en movimiento.',r:['3×10 de cada tipo','3×10 de cada tipo','2×10 de cada tipo','2×8 de cada tipo']}
+ ]},
+ {h:'4 · Antebrazo · cierre de semana',s:'Cinco minutos al terminar en el campo. Con el bate en la mano ya calientes, es el mejor momento para el trabajo de muñeca.',e:[
+  {a:'radialdev',n:'Elevación con bate · desviación radial',c:'Con tu propio bate, agarrado por el mango. Brazo al costado y subes solo con la muñeca.',r:['3×12 por lado','3×12 por lado','3×10 por lado','2×10 por lado']},
+  {a:'gripper',n:'Pronación y supinación con bate',c:'Agarra el bate por el mango y gíralo de un lado al otro sin mover el codo. Cuanto más lejos agarres, más pesa.',r:['3×12 por lado','3×12 por lado','3×10 por lado','2×10 por lado']}
  ]}]},
 
-/* 5 SABADO */
-{t:'Fin de semana · sin gimnasio',k:'mob',s:'Libre',w:'',
+/* ================= 5 · SABADO ================= */
+{t:'Sábado · víspera o descanso',k:'mob',s:'Libre',w:'',
  b:[
- {h:'Hoy no se entrena',s:'El sábado y el domingo el plan para. Lo que sigue es opcional, se hace en casa en 20 o 30 minutos y no cuenta como entrenamiento: solo ayuda a que llegues suelto al lunes.',e:[
-  {a:'mobility',n:'Cadera 90/90 con transiciones',c:'Sentado, con una pierna a 90° adelante y la otra a 90° al lado. Gira de un lado al otro sin ayudarte con las manos. Es el ejercicio que más rinde para abrir la cadera en el swing.',r:['10 por lado','10 por lado','10 por lado']}
+ {h:'Si el torneo es mañana',s:'Este es el día que más gente estropea entrenando de más. Hoy no se busca ganar nada: se busca llegar suelto y fresco.',e:[
+  {a:'mbrot',n:'Tres lanzamientos suaves por lado',c:'Solo para recordarle a la cadera el patrón. Al 60 % de intensidad, sin buscar distancia. Nada más de balón medicinal hoy.',r:['1×3 por lado','1×3 por lado','1×3 por lado','1×3 por lado']}
  ]},
- {h:'Si te apetece moverte, nada de esto es obligatorio',s:'',l:[
-  'Caminata tranquila, 20 o 30 minutos',
+ {h:'El resto de la víspera',s:'',l:[
+  '15 minutos de movilidad de cadera y hombro, sin forzar',
+  'De 20 a 30 swings en seco a media intensidad, nada de tope',
+  'Caminata de 15 minutos y punto: nada de gimnasio, sprints ni pesas',
+  'Come carbohidratos en la cena y bebe agua durante todo el día',
+  'Prepara el bolso hoy y acuéstate temprano: dormir bien vale más velocidad de bate que cualquier sesión'
+ ]},
+ {h:'Si el torneo todavía está lejos',s:'',l:[
+  'El sábado el plan para: no hay gimnasio',
+  'Caminata tranquila de 20 o 30 minutos',
   'Rodillo de espuma en cuádriceps, glúteo, dorsal y gemelo: 1 minuto por zona',
-  'Estiramiento del flexor de cadera en zancada, 3×30 s por lado',
-  'Estiramiento del durmiente para el hombro de tirar, 3×30 s',
-  'De 50 a 75 swings de técnica en seco, sin bate lastrado, frente al espejo'
- ]},
- {h:'Si tienes juego este fin de semana',s:'',l:[
-  'El juego sustituye por completo a todo lo de arriba',
-  'Calienta con la rutina de banda del martes antes de tirar',
-  'Después del juego, camina 10 minutos y estira suave: nada más'
+  'Estiramiento del flexor de cadera en zancada, 3×30 s por lado, y del durmiente para el hombro',
+  'De 30 a 50 swings de técnica en seco frente al espejo',
+  'Si tienes juego, el juego sustituye todo lo de arriba'
  ]}]},
 
-/* 6 DOMINGO */
-{t:'Descanso total',k:'off',s:'Descanso',w:'',
- b:[{h:'Hoy no haces nada',s:'',l:[
+/* ================= 6 · DOMINGO ================= */
+{t:'Domingo · torneo o descanso total',k:'off',s:'Descanso',w:'',
+ b:[{h:'Si hoy es el torneo',s:'',l:[
+  'Calienta con la rutina de banda del miércoles antes de tirar',
+  '15 swings en seco subiendo de intensidad y 3 lanzamientos rotacionales suaves antes del primer turno',
+  'Come algo con carbohidratos dos horas antes y bebe agua entre entradas',
+  'Entre juego y juego: camina, estira suave y come algo ligero. Nada de calentar a tope otra vez'
+ ]},
+ {h:'Si no hay torneo hoy',s:'',l:[
   'Sin gimnasio, sin sprints y sin swings',
   'Camina si te apetece y estira 10 minutos si el cuerpo lo pide',
-  'Duerme bien: la adaptación no ocurre mientras entrenas, ocurre hoy',
-  'Mañana es lunes y toca pierna: come bien esta noche'
+  'Duerme bien: la potencia se expresa con el sistema nervioso descansado, y eso se construye hoy',
+  'Mañana lunes toca pierna y cadera pesada'
  ]}]}
 ];
 
@@ -1040,9 +1479,24 @@ function addD(d,n){const x=new Date(d);x.setDate(x.getDate()+n);return x;}
 function fShort(d){return d.getDate()+' '+MESC[d.getMonth()];}
 function fLong(d){return DOW[d.getDay()]+' '+d.getDate()+' de '+MES[d.getMonth()];}
 function fFull(d){return d.getDate()+' de '+MES[d.getMonth()]+' de '+d.getFullYear();}
-function phaseOf(w){return w<=4?0:w<=8?1:2;}
-function isDeload(w){return w===4||w===8||w===12;}
-
+/* ---------- BLOQUES POR CUENTA ATRÁS AL TORNEO ---------- */
+const BLOQUES=[
+ {n:'Base explosiva', d:'Aprendes las máquinas y fijas las cargas. Nada al fallo: aquí solo estás preparando el terreno para las dos semanas que de verdad suben el poder.'},
+ {n:'Fuerza máxima',  d:'La parte más pesada del bloque. Menos repeticiones y más kilos. Deja siempre dos repeticiones buenas en el tanque: no es momento de buscar un récord.'},
+ {n:'Potencia',       d:'Bajas el peso y subes la velocidad. Cada repetición se mueve con la máxima intención posible. Si una se ve lenta, quita carga.'},
+ {n:'Afinado',        d:'Semana del torneo. El volumen baja a la mitad y el último día pesado es el miércoles: de ahí en adelante solo mantienes la chispa. Llegar fresco vale más velocidad de bate que cualquier sesión extra.'}
+];
+function bloqueDe(faltan){
+  if(faltan>21)return 0;
+  if(faltan>13)return 1;
+  if(faltan>6) return 2;
+  return 3;
+}
+function fechaTorneo(){return torneo;}
+function diasParaTorneo(){
+  return Math.round((new Date(torneo.getFullYear(),torneo.getMonth(),torneo.getDate())
+        -new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()))/864e5);
+}
 /* ===================== DIBUJOS ===================== */
 function svgFor(k){
   const a=ART[k]; if(!a) return '';
@@ -1066,82 +1520,72 @@ function svgFor(k){
 
 /* ===================== ESTADO ===================== */
 const TODAY=new Date();TODAY.setHours(12,0,0,0);
-/* El plan entrena de lunes a viernes, asi que toda semana arranca en lunes.
-   Sabado y domingo se mueven al lunes siguiente; de martes a viernes se toma
-   el lunes de esa misma semana, para poder empezar a mitad de semana. */
-function toMonday(d){
-  const x=new Date(d), g=x.getDay();
-  if(g===0)x.setDate(x.getDate()+1);
-  else if(g===6)x.setDate(x.getDate()+2);
-  else x.setDate(x.getDate()-(g-1));
-  x.setHours(12,0,0,0);
-  return x;
-}
-let start=toMonday(TODAY);
-let wkMode='auto';
+function parseD2(v){const p=v.split('-');return new Date(+p[0],+p[1]-1,+p[2],12,0,0);}
+let torneo=parseD2('2026-08-30');
+let blMode='auto';
 let sel=0, showAll=false;
 
-function offsetToday(){return Math.round((new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate())-new Date(start.getFullYear(),start.getMonth(),start.getDate()))/864e5);}
-function curWeek(){const o=offsetToday();if(o<0||o>=84)return null;return Math.floor(o/7)+1;}
-function curWeekNum(){if(wkMode!=='auto')return +wkMode;const w=curWeek();return w||1;}
-function curPhase(){return phaseOf(curWeekNum());}
-const WKNOTE=[
-'Aprende los movimientos. Elige un peso con el que te sobren 2 o 3 repeticiones y mide los cinco números de la guía: sin ellos no vas a poder comparar en octubre.',
-'Sube 2,5 a 5 kg en pierna y 1 a 2,5 kg en tren superior si la semana pasada salió limpia.',
-'La semana más cargada de la Fase 1. Misma técnica, algo más de peso.',
-'Descarga. Los mismos ejercicios con la mitad de las series y lejos del fallo.',
-'Empieza la Fase 2: menos repeticiones y más kilos. Sube la carga entre un 5 y un 10 %.',
-'Semana de medición. Repite el salto, el lanzamiento rotacional, el tiempo a primera y la prueba 5-10-5.',
-'La semana más pesada del plan. Deja siempre dos repeticiones buenas en el tanque.',
-'Descarga. La mitad de las series, sin acercarte al fallo en ningún ejercicio.',
-'Empieza la Fase 3. Baja al 70 % de lo que movías en la semana 7 y muévelo lo más rápido que puedas.',
-'Añade contrastes: una serie pesada seguida de un salto o un lanzamiento explosivo.',
-'Máxima intención en cada repetición. Si una se ve lenta, quita peso.',
-'Semana de cierre: 40 % menos de volumen y pruebas finales el día de campo.'];
-function repFor(x,ph,wk){
-  const base=x.r[ph];
-  if(!isDeload(wk))return base;
-  const f=(wk===12)?0.6:0.5;
-  return base.replace(/^(\d+)×/,(m,n)=>Math.max(2,Math.round(+n*f))+'×');
+function diasParaTorneo(){
+  return Math.round((new Date(torneo.getFullYear(),torneo.getMonth(),torneo.getDate())
+        -new Date(TODAY.getFullYear(),TODAY.getMonth(),TODAY.getDate()))/864e5);
 }
+function bloqueActual(){
+  if(blMode!=='auto')return +blMode;
+  const f=diasParaTorneo();
+  if(f<0)return 3;
+  return bloqueDe(f);
+}
+/* primer lunes del plan: el lunes de la semana en que estamos */
+function lunesDe(d){const x=new Date(d),g=x.getDay();
+  x.setDate(x.getDate()-((g+6)%7));x.setHours(12,0,0,0);return x;}
+function inicioPlan(){return lunesDe(TODAY);}
+/* semanas que caben desde el lunes actual hasta el torneo */
+function semanasPlan(){
+  const ini=inicioPlan();
+  const dias=Math.round((new Date(torneo.getFullYear(),torneo.getMonth(),torneo.getDate())
+              -new Date(ini.getFullYear(),ini.getMonth(),ini.getDate()))/864e5)+1;
+  return Math.max(1,Math.min(10,Math.ceil(dias/7)));
+}
+function bloqueDeFecha(d){
+  const f=Math.round((new Date(torneo.getFullYear(),torneo.getMonth(),torneo.getDate())
+        -new Date(d.getFullYear(),d.getMonth(),d.getDate()))/864e5);
+  if(f<0)return 3;
+  return bloqueDe(f);
+}
+function esTorneo(d){return toVal(d)===toVal(torneo);}
+function repFor(x,bl){return x.r[bl];}
 function vidURL(n){return 'https://www.youtube.com/results?search_query='+encodeURIComponent(n+' ejercicio técnica');}
 
 /* ===================== RENDER ===================== */
 function renderToday(){
-  const o=offsetToday(), el=document.getElementById('todayCard'), ph=curPhase();
+  const el=document.getElementById('todayCard'), f=diasParaTorneo(), bl=bloqueActual();
+  const d=sesionRecomendada();
+  const S=PLAN[d];
   let num,tit,meta,txt,btn=true,etiquetaBoton='Ver la sesión completa';
-  if(o<0){
-    const f=-o;
-    num='—';tit='Todavía no empieza';
-    meta='Arranca el '+fLong(start);
-    txt='Faltan '+f+(f===1?' día':' días')+('. Aprovecha para medir los cinco números de la guía: salto, lanzamiento rotacional, home a primera y la prueba 5-10-5. Sin esos datos de partida no vas a poder comparar en 12 semanas.');
+
+  if(f===0){
+    num='!';tit='Hoy es el torneo';
+    meta='Día de competencia · '+fLong(TODAY);
+    txt='Nada de gimnasio. Calienta con la rutina de banda, 15 swings en seco subiendo de intensidad y 3 lanzamientos rotacionales suaves antes del primer turno. Come algo con carbohidratos dos horas antes y bebe agua entre entradas.';
     btn=false;
-  } else if(o>=84){
-    num='✓';tit='Plan completado';
-    meta='Terminó el '+fLong(addD(start,83));
-    txt='Vuelve a medir los cinco números y compáralos con los del primer día. Para el siguiente bloque, cambia la fecha de inicio aquí arriba y empieza de nuevo desde la Fase 1 con las cargas nuevas.';
+  } else if(f<0){
+    num='✓';tit='El torneo ya pasó';
+    meta='Fue el '+fLong(torneo);
+    txt='Descansa dos o tres días y después cambia la fecha aquí arriba para armar el siguiente pico. Si mediste la velocidad de salida, compárala con la del primer viernes.';
     btn=false;
+  } else if(d>=5){
+    num='—';tit=S.t;
+    meta=(f===1?'Mañana es el torneo':'Faltan '+f+' días para el torneo')+' · '+fLong(TODAY);
+    txt=(f<=2)
+      ? 'A dos días del torneo lo único que importa es llegar fresco. Camina, estira suave y duerme. Nada de gimnasio ni de swings a tope.'
+      : 'Fin de semana: el plan para. Si tienes juego, el juego es todo lo que haces. El lunes toca poder de pierna.';
+    etiquetaBoton='Ver lo que toca el lunes';
+    sel=0;
   } else {
-    const w=Math.floor(o/7)+1, d=o%7, S=PLAN[d];
-    num=(d<5)?String(d+1):'—';tit=S.t;
-    if(d>=5){
-      /* fin de semana: no se entrena, no tiene sentido hablar de cargas */
-      meta='Semana '+w+' de 12 · fin de semana · '+fLong(TODAY);
-      txt=(d===5)
-        ? 'Hoy y mañana el plan para. Si tienes juego, el juego es todo lo que haces. Si no, camina un rato y estira suave: el lunes toca pierna y potencia rotacional.'
-        : 'Descanso total. La adaptación de toda la semana ocurre hoy, no en el gimnasio. Mañana lunes arranca la semana '+(w<12?w+1:12)+' con pierna y potencia rotacional.';
-      etiquetaBoton='Ver lo que toca el lunes';
-      sel=0;
-    } else {
-      meta='Semana '+w+' de 12 · Fase '+(phaseOf(w)+1)+' · '+fLong(TODAY);
-      txt=isDeload(w)
-        ? (w===12?'Semana 12: la de cierre. Baja el volumen un 40 % y guarda energía para las pruebas finales del viernes.'
-                 :'Semana de descarga. Mismos ejercicios, la mitad de las series y sin acercarte al fallo. Esta semana es la que te deja asimilar las tres anteriores.')
-        : ['Fase de cimientos: series largas, peso moderado y técnica limpia por encima de todo.',
-           'Fase de fuerza: menos repeticiones y más kilos. Deja siempre dos repeticiones buenas en el tanque.',
-           'Fase de potencia: carga media movida lo más rápido posible. Si una repetición se ve lenta, baja el peso.'][phaseOf(w)];
-      sel=d;
-    }
+    num=String(d+1);tit=S.t;
+    meta='Faltan '+f+' día'+(f===1?'':'s')+' · bloque '+(bl+1)+' de 4 · '+fLong(TODAY);
+    txt=BLOQUES[bl].d;
+    sel=d;
   }
   el.innerHTML='<div class="big"><span>'+num+'</span></div><div>'
     +'<div class="meta">'+meta+'</div><h3>'+tit+'</h3><p>'+txt+'</p>'
@@ -1152,30 +1596,28 @@ function renderToday(){
 }
 
 function renderDaybar(){
-  const bar=document.getElementById('daybar'), o=offsetToday();
-  const todayIdx=(o>=0&&o<84)?o%7:-1;
+  const bar=document.getElementById('daybar');
+  const todayIdx=sesionRecomendada();
+  const L=inicioPlan();
   bar.innerHTML=PLAN.map((S,i)=>{
-    const dia=DOW[addD(start,i).getDay()];
+    const dia=DOW[addD(L,i).getDay()];
     return '<button data-i="'+i+'" aria-pressed="'+(!showAll&&i===sel)+'"'+(i===todayIdx?' class="is-today"':'')+'>'
     +'<b>'+dia.charAt(0).toUpperCase()+dia.slice(1)+'</b><small>'+(i<5?'Sesión '+(i+1)+' · '+S.s:'Libre')+'</small></button>';}).join('');
   bar.querySelectorAll('button').forEach(b=>b.onclick=()=>{sel=+b.dataset.i;showAll=false;renderDaybar();renderSessions();});
 }
 
 function sessionHTML(i){
-  const S=PLAN[i], ph=curPhase();
+  const S=PLAN[i], bl=bloqueActual(), L=inicioPlan();
   let h='<article class="sess"><header class="'+KCL[S.k]+'"><div class="dmk"><span>'+(i+1)+'</span></div>'
-   +'<div><span class="when">'+DOW[addD(start,i).getDay()]+(i<5?' · sesión '+(i+1)+' de 5':' · sin gimnasio')+'</span><h3>'+S.t+'</h3></div></header><div class="sbody">';
-  const wk=curWeekNum();
-  if(S.k==='mob'&&isDeload(wk))
-    h+='<div class="wknote"><b>Semana '+wk+' de 12 · descarga</b>Este día no cambia en las semanas de descarga: la recuperación activa se hace igual que siempre.</div>';
-  else if(S.k!=='off')
-    h+='<div class="'+(isDeload(wk)?'dload':'wknote')+'"><b>Semana '+wk+' de 12 · Fase '+(ph+1)+'</b>'+WKNOTE[wk-1]+'</div>';
+   +'<div><span class="when">'+DOW[addD(L,i).getDay()]+(i<5?' · sesión '+(i+1)+' de 5':' · sin gimnasio')+'</span><h3>'+S.t+'</h3></div></header><div class="sbody">';
+  if(S.k!=='off')
+    h+='<div class="'+(bl===3?'dload':'wknote')+'"><b>Bloque '+(bl+1)+' de 4 · '+BLOQUES[bl].n+'</b>'+BLOQUES[bl].d+'</div>';
   if(S.w)h+='<div class="warmup"><b>Calentamiento</b>'+S.w+'</div>';
   for(const B of S.b){
     h+='<div class="blkh"><h4>'+B.h+'</h4>'+(B.s?'<p>'+B.s+'</p>':'')+'</div>';
     if(B.e){h+='<div class="exl">'+B.e.map(x=>
       '<div class="exc">'+svgFor(x.a)+'<div><span class="nm">'+x.n+'</span>'
-      +'<span class="rp'+(S.k==='gym'?'':' alt')+'">'+repFor(x,ph,wk)+'</span>'
+      +'<span class="rp'+(S.k==='gym'?'':' alt')+'">'+repFor(x,bl)+'</span>'
       +'<span class="cu">'+x.c+'</span>'
       +'<a class="vid" href="'+vidURL(x.n)+'" target="_blank" rel="noopener">Ver en video ↗</a>'
       +'</div></div>').join('')+'</div>';}
@@ -1193,45 +1635,52 @@ function renderSessions(){
 }
 
 function renderCalendar(){
-  const box=document.getElementById('calendar'), o=offsetToday();
+  const box=document.getElementById('calendar'), L=inicioPlan(), NS=semanasPlan();
   let h='';
-  for(let w=0;w<12;w++){
-    const wk=w+1, ph=phaseOf(wk), dl=isDeload(wk);
-    h+='<div class="wk"><div class="wkh"><b>Semana '+wk+'</b>'
-     +'<span class="ph p'+(ph+1)+'">Fase '+(ph+1)+'</span>'
-     +(dl?'<span class="ph dl">'+(wk===12?'Cierre −40 %':'Descarga −50 %')+'</span>':'')
-     +'<span class="lbl">'+fShort(addD(start,w*7))+' — '+fShort(addD(start,w*7+6))+'</span></div><div class="wkd">';
+  for(let w=0;w<NS;w++){
+    const ini=addD(L,w*7), fin=addD(L,w*7+6), bl=bloqueDeFecha(ini);
+    const tieneTorneo=(torneo>=ini&&torneo<=fin);
+    h+='<div class="wk"><div class="wkh"><b>Semana '+(w+1)+'</b>'
+     +'<span class="ph p'+(bl<3?bl+1:3)+'">Bloque '+(bl+1)+' · '+BLOQUES[bl].n+'</span>'
+     +(tieneTorneo?'<span class="ph dl">Semana del torneo</span>':'')
+     +'<span class="lbl">'+fShort(ini)+' — '+fShort(fin)+'</span></div><div class="wkd">';
     for(let d=0;d<7;d++){
-      const idx=w*7+d, date=addD(start,idx), S=PLAN[d];
-      h+='<div class="'+KDOT[S.k]+(idx===o?' now':'')+'">'
-       +'<span class="dt">'+DOW[date.getDay()].slice(0,3)+' '+fShort(date)+'</span>'
-       +'<span class="nm">'+S.s+'</span></div>';
+      const idx=w*7+d, fecha=addD(L,idx), S=PLAN[d];
+      const hoy=toVal(fecha)===toVal(TODAY);
+      const torn=esTorneo(fecha);
+      const pasado=fecha<torneo||torn;
+      h+='<div class="'+(torn?'f':KDOT[S.k])+(hoy?' now':'')+(torn?' tor':'')+'">'
+       +'<span class="dt">'+DOW[fecha.getDay()].slice(0,3)+' '+fShort(fecha)+'</span>'
+       +'<span class="nm">'+(torn?'TORNEO':(pasado?S.s:'—'))+'</span></div>';
     }
     h+='</div></div>';
   }
   box.innerHTML=h;
+  const f=diasParaTorneo();
   document.getElementById('calLead').textContent=
-    'Del '+fLong(start)+' al '+fLong(addD(start,83))+'. Cada semana va de lunes a viernes; los dos últimos recuadros de cada fila son el fin de semana libre. Las semanas 4 y 8 son de descarga: los mismos ejercicios con la mitad del volumen.';
+    (f>0?'Faltan '+f+' días. ':(f===0?'El torneo es hoy. ':'El torneo ya pasó. '))
+    +'Del '+fLong(L)+' al '+fLong(torneo)+'. Se entrena de lunes a viernes; el fin de semana el plan para. '
+    +'Los bloques se ajustan solos según lo que falte: cuanto más cerca el torneo, menos volumen y más velocidad.';
   document.getElementById('kick').textContent=
-    (fShort(start)+' — '+fShort(addD(start,83))+' · 12 semanas · lunes a viernes').toUpperCase();
+    (f>0?('FALTAN '+f+' DÍAS · TORNEO '+fShort(torneo).toUpperCase())
+        :(f===0?'HOY ES EL TORNEO':'TORNEO '+fShort(torneo).toUpperCase()));
   document.getElementById('foot').textContent=
-    'Plan de 12 semanas · '+fFull(start)+' — '+fFull(addD(start,83));
+    'Pico de poder · del '+fFull(L)+' al torneo del '+fFull(torneo);
 }
 
 function renderSheet(){
-  const wk=curWeekNum(), ph=phaseOf(wk), box=document.getElementById('sheet');
-  let h='<div class="sh"><div class="shh"><b>Semana '+wk+' de 12</b>'
-   +'<span>Fase '+(ph+1)+(isDeload(wk)?' · descarga':'')+'</span>'
-   +'<span>'+fShort(addD(start,(wk-1)*7))+' — '+fShort(addD(start,(wk-1)*7+6))+'</span></div>'
-   +'<p class="shn">'+WKNOTE[wk-1]+'</p>'
+  const bl=bloqueActual(), L=inicioPlan(), box=document.getElementById('sheet'), f=diasParaTorneo();
+  let h='<div class="sh"><div class="shh"><b>Bloque '+(bl+1)+' · '+BLOQUES[bl].n+'</b>'
+   +'<span>'+(f>0?'faltan '+f+' días':'torneo')+'</span>'
+   +'<span>torneo: '+fShort(torneo)+'</span></div>'
+   +'<p class="shn">'+BLOQUES[bl].d+'</p>'
    +'<p class="shtip"><b>Las dos últimas columnas van en blanco a propósito.</b> Anota con lápiz el peso '
-   +'que usaste en cada ejercicio y marca la casilla al terminarlo. Esos números son los que te dicen '
-   +'cuánto subir la semana que viene.</p>';
+   +'que usaste y marca la casilla al terminar. Esos números te dicen si estás subiendo o si necesitas bajar carga.</p>';
   PLAN.forEach((S,i)=>{
-    const d=addD(start,(wk-1)*7+i), rows=[], extra=[];
-    S.b.forEach(B=>{ if(B.e)B.e.forEach(x=>rows.push([x.n,repFor(x,ph,wk)])); if(B.l)B.l.forEach(t=>extra.push(t)); });
+    const d=addD(L,i), rows=[], extra=[];
+    S.b.forEach(B=>{ if(B.e)B.e.forEach(x=>rows.push([x.n,repFor(x,bl)])); if(B.l)B.l.forEach(t=>extra.push(t)); });
     const dn=DOW[d.getDay()];
-    h+='<div class="shd"><h4>'+dn.charAt(0).toUpperCase()+dn.slice(1)+' · '+S.t+' <em>'+fShort(d)+'</em></h4>';
+    h+='<div class="shd"><h4>'+dn.charAt(0).toUpperCase()+dn.slice(1)+' · '+S.t+'</h4>';
     if(rows.length){
       h+='<div class="tw"><table class="sht"><thead><tr><th>Ejercicio</th><th>Haz esto</th><th>Peso que usé</th><th>Hecho</th></tr></thead><tbody>';
       rows.forEach(r=>h+='<tr><td>'+r[0]+'</td><td class="mono">'+r[1]+'</td><td class="fill"></td><td class="tick"></td></tr>');
@@ -1240,34 +1689,85 @@ function renderSheet(){
     if(extra.length)h+='<p class="shp">'+extra.join(' · ')+'</p>';
     h+='</div>';
   });
-  h+='<div class="shnotes"><b>Notas de la semana</b><i></i><i></i><i></i></div></div>';
+  h+='<div class="shnotes"><b>Velocidad de salida y notas</b><i></i><i></i><i></i></div></div>';
   box.innerHTML=h;
 }
 
-function renderPills(){
-  const sel=document.getElementById('wkSel'), w=curWeek();
-  let o='<option value="auto">'+(w?'Auto · semana '+w:'Auto')+'</option>';
-  for(let i=1;i<=12;i++)o+='<option value="'+i+'">Semana '+i+' · Fase '+(phaseOf(i)+1)+(isDeload(i)?' · descarga':'')+'</option>';
-  sel.innerHTML=o; sel.value=wkMode;
+/* ===== ¿Qué hiciste ayer? ===== */
+const ES_PIERNA=[true,false,false,true,false,false,false];   // lunes y jueves cargan pierna
+const OPC=[
+ {i:-1,l:'Nada / descansé'},
+ {i:0, l:'Pierna'},
+ {i:1, l:'Rotación'},
+ {i:2, l:'Superior'},
+ {i:4, l:'Campo'}
+];
+let ayer=null;          // índice de sesión hecha ayer, o null
+let ayerFecha=null;     // para que caduque al día siguiente
+
+function hoyIdx(){return (TODAY.getDay()+6)%7;}
+
+/* qué sesión conviene hoy, dado lo de ayer */
+function sesionRecomendada(){
+  const h=hoyIdx();
+  if(ayer===null||ayer<0)return h;
+  if(h>=5)return h;                                  // fin de semana, no se toca
+  if(!(ES_PIERNA[ayer]&&ES_PIERNA[h]))return h;      // no hay choque
+  /* choque de pierna: busca el día laborable más cercano que no sea pierna
+     y que no hayas hecho ayer */
+  const orden=[1,2,4];                               // rotación, superior, campo
+  for(const c of orden) if(c!==ayer) return c;
+  return h;
 }
 
-function renderAll(){renderPills();renderToday();renderDaybar();renderSessions();renderCalendar();renderSheet();}
+function renderAyer(){
+  const cont=document.getElementById('ayerBtns'), res=document.getElementById('ayerRes');
+  if(!cont)return;
+  cont.innerHTML=OPC.map(o=>'<button data-s="'+o.i+'" aria-pressed="'+(ayer===o.i)+'">'+o.l+'</button>').join('');
+  cont.querySelectorAll('button').forEach(b=>b.onclick=()=>{
+    const v=+b.dataset.s;
+    ayer=(ayer===v)?null:v;
+    ayerFecha=toVal(TODAY);
+    guardar(); renderAyer(); renderToday(); renderDaybar(); renderSessions();
+  });
+  const h=hoyIdx(), rec=sesionRecomendada();
+  if(ayer===null){ res.innerHTML=''; return; }
+  if(ayer<0){
+    res.innerHTML='Descansaste ayer, así que hoy te toca lo que marca el calendario: <strong>'+PLAN[h].t+'</strong>.';
+  } else if(rec!==h){
+    res.innerHTML='<span class="warn3">Ayer hiciste pierna y hoy tocaría '+PLAN[h].s+', que también la carga.</span> '
+      +'Cámbialo: hoy haz <strong>'+PLAN[rec].t+'</strong>. No carga pierna y no pierdes nada del plan. '
+      +'El '+DOW[addD(inicioPlan(),h).getDay()]+' que viene ya vuelves al orden normal.';
+  } else {
+    res.innerHTML='Sin choque: ayer hiciste '+PLAN[ayer].s+' y hoy toca <strong>'+PLAN[h].t+'</strong>. Adelante.';
+  }
+}
+
+function renderPills(){
+  const sel=document.getElementById('wkSel'), bl=bloqueActual();
+  let o='<option value="auto">Auto · bloque '+(bl+1)+'</option>';
+  for(let i=0;i<4;i++)o+='<option value="'+i+'">Bloque '+(i+1)+' · '+BLOQUES[i].n+'</option>';
+  sel.innerHTML=o; sel.value=blMode;
+}
+
+function renderAll(){renderPills();renderAyer();renderToday();renderDaybar();renderSessions();renderCalendar();renderSheet();}
 
 /* ===================== EVENTOS ===================== */
 const inp=document.getElementById('start');
-inp.value=toVal(start);
+inp.value=toVal(torneo);
 inp.addEventListener('change',()=>{
   if(!inp.value)return;
-  const pedido=parseD(inp.value);
-  if(isNaN(pedido))return;
-  start=toMonday(pedido);
-  const movido=toVal(pedido)!==toVal(start);
-  inp.value=toVal(start);
+  const nuevo=parseD(inp.value);
+  if(isNaN(nuevo))return;
+  torneo=nuevo;
   guardar();renderAll();
-  if(movido)marcarEstado('ajustado',pedido);
+  const f=diasParaTorneo();
+  if(f<0)marcarEstado('pasado');
+  else if(f>56)marcarEstado('lejos',f);
+  else marcarEstado('guardado');
 });
 document.getElementById('wkSel').onchange=e=>{
-  wkMode=e.target.value;guardar();renderSessions();renderSheet();
+  blMode=e.target.value;guardar();renderSessions();renderSheet();
 };
 /* Vista previa: primero se ve, y solo se imprime si el usuario lo pide */
 const pv=document.getElementById('pv');
@@ -1276,7 +1776,7 @@ function abrirPreview(){
     +'<div class="pvnota" style="color:#55625B;text-align:left;margin-top:18px">'
     +'Si al imprimir aparece la dirección del archivo o la fecha en el borde, desmarca '
     +'<b style="color:#141B1E">Encabezados y pies de página</b> en el cuadro de impresión.</div>';
-  document.getElementById('pvTit').textContent='Vista previa · semana '+curWeekNum();
+  document.getElementById('pvTit').textContent='Vista previa · bloque '+(bloqueActual()+1);
   pv.hidden=false;
   document.body.style.overflow='hidden';
   document.getElementById('pvClose').focus();
@@ -1308,7 +1808,7 @@ document.getElementById('btnPrint').onclick=()=>{
 };
 
 /* ===================== GUARDADO EN localStorage ===================== */
-const LS_KEY='planBeisbol.v2';
+const LS_KEY='planBeisbol.v5';
 let memoria={};                 // respaldo si el navegador bloquea localStorage
 let almacenOK=true;
 
@@ -1324,7 +1824,7 @@ function escribirAlmacen(obj){
   }catch(e){ almacenOK=false; memoria[LS_KEY]=obj; }
 }
 function guardar(){
-  escribirAlmacen({inicio:toVal(start), semana:wkMode, tinta:document.body.classList.contains('tinta'), guardadoEl:new Date().toISOString()});
+  escribirAlmacen({torneo:toVal(torneo), bloque:blMode, ayer:ayer, ayerFecha:ayerFecha, tinta:document.body.classList.contains('tinta'), guardadoEl:new Date().toISOString()});
   marcarEstado('guardado');
 }
 function borrarGuardado(){
@@ -1332,7 +1832,7 @@ function borrarGuardado(){
 }
 
 /* aviso discreto bajo la barra */
-function marcarEstado(tipo,fechaGuardada){
+function marcarEstado(tipo,dato){
   const el=document.getElementById('estado');
   if(!el)return;
   if(!almacenOK){
@@ -1341,21 +1841,27 @@ function marcarEstado(tipo,fechaGuardada){
       +'La fecha funcionará mientras tengas la página abierta, pero se perderá al cerrarla.';
     return;
   }
-  if(tipo==='ajustado'){
+  if(tipo==='lejos'){
     el.className='estado warn2';
-    el.innerHTML='Elegiste el <b>'+fLong(fechaGuardada)+'</b>. Como el plan entrena de lunes a viernes, '
-      +'moví el arranque al <b>'+fLong(start)+'</b>.';
+    el.innerHTML='Faltan <b>'+dato+' días</b> para ese torneo. Este plan está pensado como un pico de '
+      +'4 a 6 semanas; si falta mucho más, entrena base unas semanas y vuelve a poner la fecha cuando '
+      +'estés a mes y medio.';
+    return;
+  }
+  if(tipo==='pasado'){
+    el.className='estado warn2';
+    el.innerHTML='Esa fecha ya pasó. Pon la del próximo torneo para que el plan se recalcule.';
     return;
   }
   if(tipo==='restaurado'){
     el.className='estado';
-    el.innerHTML='Retomando tu plan guardado: empezaste el <b>'+fLong(start)+'</b>. '
-      +'<button id="btnReset" type="button">Empezar de cero hoy</button>';
+    el.innerHTML='Retomando tu plan: torneo el <b>'+fLong(torneo)+'</b>. '
+      +'<button id="btnReset" type="button">Volver al 30 de agosto</button>';
     const r=document.getElementById('btnReset');
     if(r)r.onclick=()=>{
       borrarGuardado();
-      start=toMonday(TODAY); wkMode='auto';
-      inp.value=toVal(start);
+      torneo=parseD2('2026-08-30'); blMode='auto';
+      inp.value=toVal(torneo);
       guardar(); renderAll();
     };
   } else {
@@ -1367,14 +1873,16 @@ function marcarEstado(tipo,fechaGuardada){
 function cargar(){
   const d=leerAlmacen();
   let restaurado=false;
-  if(d&&d.inicio&&/^\d{4}-\d{2}-\d{2}$/.test(d.inicio)){
-    const f=parseD(d.inicio);
-    if(!isNaN(f)){ start=toMonday(f); restaurado=true; }
+  if(d&&d.torneo&&/^\d{4}-\d{2}-\d{2}$/.test(d.torneo)){
+    const f=parseD(d.torneo);
+    if(!isNaN(f)){ torneo=f; restaurado=true; }
   }
-  if(d&&d.semana&&(d.semana==='auto'||(+d.semana>=1&&+d.semana<=12))) wkMode=String(d.semana);
+  if(d&&d.bloque&&(d.bloque==='auto'||(+d.bloque>=0&&+d.bloque<=3))) blMode=String(d.bloque);
+  /* lo de "ayer" solo vale para hoy: si es de otro día, se descarta */
+  if(d&&d.ayerFecha===toVal(TODAY)&&typeof d.ayer==='number') ayer=d.ayer;
   if(d&&d.tinta===false) document.body.classList.remove('tinta');
   pintarTinta();
-  inp.value=toVal(start);
+  inp.value=toVal(torneo);
   renderAll();
   if(restaurado)marcarEstado('restaurado');
   else if(!almacenOK)marcarEstado();
